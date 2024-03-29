@@ -7,14 +7,12 @@ export default function Layout(){
     return(
         <>
 <Nav />
-        <main>
-        <Outlet />
-        </main>
+    <main>
+    <Outlet />
+    </main>
 <footer>
-
-<Faq />
-
-<Footer />
+    <Faq />
+    <Footer />
 </footer>
         </>
     )
