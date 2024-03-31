@@ -31,10 +31,15 @@ export default function UserLogin() {
         },
       })
 
-      function onSubmit(values) {
-const axios = axiosClient.post('/login',values)
-        console.log(values,axios)
-      }
+      const onSubmit = async values => {
+        try {
+            await axiosClient.get('/sanctum/csrf-cookie');
+            const { data } = await axiosClient.post('/api/login', values);
+            console.log(data);
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
     return (
     <>
  <Form {...form}>
