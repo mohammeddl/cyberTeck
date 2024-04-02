@@ -1,6 +1,26 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-export default function Nav()
-{
+export default function Nav() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const checkIfLoggedIn = () => {
+
+        let userData = localStorage.getItem("user"); // get user from local storage
+
+        localStorage.setItem("user", userData)
+        // localStorage.setItem("token", data.accessToken)
+        if(userData) {
+            setIsLoggedIn(true)
+        } else {
+            setIsLoggedIn(false)
+        }
+    }
+
+    useEffect(() => {
+        checkIfLoggedIn();
+    }, [])
+
+
 return(
     <header><section className="relative block w-full py-6 leading-10 text-center text-indigo-900 bg-black">
     <div className="w-full px-6 mx-auto leading-10 text-center lg:px-8 max-w-7xl">
@@ -36,9 +56,13 @@ return(
                     </span>
                 </Link>
             </div>
-            <div className="relative items-center hidden px-4 mt-2 space-x-5 font-medium leading-10 md:flex md:flex-grow-0 md:flex-shrink-0 md:mt-0 md:text-right lg:flex-grow-0 lg:flex-shrink-0">
+            {
+                isLoggedIn ? (
+                    <button> log out</button>
+                ) : (
+                    <div className="relative items-center hidden px-4 mt-2 space-x-5 font-medium leading-10 md:flex md:flex-grow-0 md:flex-shrink-0 md:mt-0 md:text-right lg:flex-grow-0 lg:flex-shrink-0">
                 <Link to={('/login')}
-                 className="relative inline-block px-0.5 text-base font-bold text-gray-200 uppercase transition duration-150 ease hover:text-white">
+                    className="relative inline-block px-0.5 text-base font-bold text-gray-200 uppercase transition duration-150 ease hover:text-white">
                     <span className="block">Login</span>
                     <span className="absolute bottom-0 left-0 inline-block w-full h-2 -mb-2 overflow-hidden">
                         <span  className="absolute inset-0 inline-block w-full h-full transform translate-x-0 bg-black"></span>
@@ -49,6 +73,8 @@ return(
                     Sign Up
                 </Link>
             </div>
+                )
+            }
 
             <div className="flex items-center justify-center h-full mr-5 text-white md:hidden">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path  d="M4 8h16M4 16h16"></path></svg>

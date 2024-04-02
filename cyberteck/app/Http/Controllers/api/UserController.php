@@ -30,12 +30,21 @@ class UserController extends Controller
         }
     }
 
+    public function test(){
+        return response()->json([
+            'yess'=>'yes is working',
+            'stuts'=>true
+        ],200);
+    }
+
     public function login(Request $request)
     {
         $loginData = $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string',
         ]);
+
+        // return response()->json($request,200);
 
         if (!auth()->attempt($loginData)) {
             return response()->json(['message' => 'Invalid credentials'], 401);

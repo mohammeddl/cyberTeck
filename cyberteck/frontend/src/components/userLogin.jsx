@@ -15,6 +15,9 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { axiosClient } from "../api/axios";
+import { useNavigate } from "react-router-dom";
+import Users from "../pages/users";
+import {Loader2} from "lucide-react";
 
 export default function UserLogin() {
     const formSchema = z.object({
@@ -22,6 +25,7 @@ export default function UserLogin() {
       password: z.string().min(8).max(30),
     })
 
+    const navigate = useNavigate()
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -31,14 +35,24 @@ export default function UserLogin() {
         },
       })
 
+      const { setError , formState:{isSubmitting} } = form
+
       const onSubmit = async values => {
-        try {
             await axiosClient.get('/sanctum/csrf-cookie');
-            const { data } = await axiosClient.post('/api/login', values);
-            console.log(data);
-        } catch (error) {
-            console.error("Error:", error);
-        }
+            const data = await axiosClient.post('/api/login', values).then(
+                (value)=>{
+                    if(value.status === 200){
+                        navigate(Users)
+                    }
+                }
+            ).catch(({response})=>{
+            console.log(response.data.message)
+            form.setError('email',{
+                message: response.data.message
+            })
+
+            })
+
     };
     return (
     <>
@@ -64,13 +78,13 @@ export default function UserLogin() {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input type={'password'} placeholder="Passwprd" {...field} />
+                <Input className={'bg-slate-500'} type={'password'} placeholder="Passwprd" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button disabled={isSubmitting} type="submit">{isSubmitting && <Loader2 className="mx-2 my-2 animate-spin"/>} {''}submit</Button>
       </form>
     </Form>
     </>
