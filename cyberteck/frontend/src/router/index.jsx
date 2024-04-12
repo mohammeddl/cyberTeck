@@ -6,6 +6,7 @@ import Users from "../pages/users"
 import NotFound from "../pages/notFound"
 import Layout from "../layouts/layout"
 import Blog from "../pages/blog"
+import Community from "../pages/community"
 
 export const router= createBrowserRouter([
 
@@ -35,6 +36,10 @@ children:[
         {
         path: '/blog',
         element: <Blog />
+    },
+        {
+        path: '/community',
+        element: <Community />
     },
 ]
     },
