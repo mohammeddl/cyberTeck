@@ -5,6 +5,7 @@ import Signup from "../pages/signup"
 import Users from "../pages/users"
 import NotFound from "../pages/notFound"
 import Layout from "../layouts/layout"
+import Blog from "../pages/blog"
 
 export const router= createBrowserRouter([
 
@@ -30,6 +31,10 @@ children:[
         {
         path: '*',
         element: <NotFound />
+    },
+        {
+        path: '/blog',
+        element: <Blog />
     },
 ]
     },
