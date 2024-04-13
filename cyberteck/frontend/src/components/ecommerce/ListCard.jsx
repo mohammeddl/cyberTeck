@@ -6,7 +6,7 @@ const products = [
         color: "White and black",
         href: "#",
         imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/product-page-03-related-product-01.jpg",
+            "https://img.odcdn.com.br/wp-content/uploads/2020/12/cyberpunk.png",
         imageAlt:
             "Front of zip tote bag with white canvas, black canvas straps and handle, and black zipper pulls.",
         price: "$140",

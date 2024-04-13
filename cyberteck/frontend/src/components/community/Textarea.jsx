@@ -1,68 +1,6 @@
 
-import { Fragment, useState } from "react";
-import {
-    EmojiHappyIcon,
-    EmojiSadIcon,
-    FireIcon,
-    HeartIcon,
-    PaperClipIcon,
-    ThumbUpIcon,
-    XIcon,
-} from "@heroicons/react/solid";
-import { Listbox, Transition } from "@headlessui/react";
-
-const moods = [
-    {
-        name: "Excited",
-        value: "excited",
-        icon: FireIcon,
-        iconColor: "text-white",
-        bgColor: "bg-red-500",
-    },
-    {
-        name: "Loved",
-        value: "loved",
-        icon: HeartIcon,
-        iconColor: "text-white",
-        bgColor: "bg-pink-400",
-    },
-    {
-        name: "Happy",
-        value: "happy",
-        icon: EmojiHappyIcon,
-        iconColor: "text-white",
-        bgColor: "bg-green-400",
-    },
-    {
-        name: "Sad",
-        value: "sad",
-        icon: EmojiSadIcon,
-        iconColor: "text-white",
-        bgColor: "bg-yellow-400",
-    },
-    {
-        name: "Thumbsy",
-        value: "thumbsy",
-        icon: ThumbUpIcon,
-        iconColor: "text-white",
-        bgColor: "bg-blue-500",
-    },
-    {
-        name: "I feel nothing",
-        value: null,
-        icon: XIcon,
-        iconColor: "text-gray-400",
-        bgColor: "bg-transparent",
-    },
-];
-
-function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
-}
 
 export default function Textareas() {
-    const [selected, setSelected] = useState(moods[5]);
-
     return (
         <div className="flex justify-center py-12">
         <div className="flex items-start w-2/5 space-x-4">
@@ -103,7 +41,7 @@ export default function Textareas() {
                         <div className="flex-shrink-0">
                             <button
                                 type="submit"
-                                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                             >
                                 Post
                             </button>
