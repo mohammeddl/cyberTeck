@@ -1,8 +1,12 @@
-export default function Home(){
-    return(
+import ListCard from "../components/ecommerce/ListCard";
+import ShoppingCarts from "../components/ecommerce/ShoppingCarts";
+import ListReviews from "../components/ecommerce/ListReviews";
+export default function Home() {
+    return (
         <>
-        <p>hi your in home</p>
+            <ShoppingCarts />
+            {/* <ListReviews/> */}
+            <ListCard />
         </>
-    )
-
+    );
 }
