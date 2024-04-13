@@ -1,7 +1,8 @@
+import Textareas from "../components/community/Textarea";
 
 
 export default function Community(){
     return(<>
-<h1>community</h1>
+<Textareas/>
     </>)
 }
