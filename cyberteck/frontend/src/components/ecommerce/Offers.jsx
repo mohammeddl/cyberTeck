@@ -1,7 +1,7 @@
 export default function Offers() {
     return (
         <div className="bg-white pt-16 lg:py-24">
-            <div className="pb-16 bg-indigo-600 lg:pb-0 lg:z-10 lg:relative">
+            <div className="pb-16 bg-gray-900 lg:pb-0 lg:z-10 lg:relative">
                 <div className="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-8">
                     <div className="relative lg:-my-8">
                         <div
@@ -12,7 +12,7 @@ export default function Offers() {
                             <div className="aspect-w-10 aspect-h-6 rounded-xl shadow-xl overflow-hidden sm:aspect-w-16 sm:aspect-h-7 lg:aspect-none lg:h-full">
                                 <img
                                     className="object-cover lg:h-full lg:w-full"
-                                    src="https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2102&q=80"
+                                    src="https://media.wired.com/photos/62855b1bb6cfd378a30c474a/master/w_1920,c_limit/Build-Game-Watch-It-Die-Hyper-Scape-Games.jpg"
                                     alt=""
                                 />
                             </div>
