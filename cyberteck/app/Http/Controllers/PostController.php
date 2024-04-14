@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index(){
-        $products = Post::all();
-        return response()->json($products);
+        $postes = Post::all();
+        return response()->json($postes);
     }
 
     public function store(PostRequest $request){
@@ -22,7 +22,17 @@ class PostController extends Controller
             $imageName = '';
         }
 
-        $product = Post::create($request->all());
-        return response()->json($product, 201);
+        $post = Post::create($request->all());
+        return response()->json($post, 201);
+    }
+
+    public function update(PostRequest $request, $id){
+$post= Post::find($id);
+if(!$post){
+    return response()->json(['message' => 'Post not found'], 404);
+}
+$post->update($request->all());
+return response()->json($post,200);
+
     }
 }
