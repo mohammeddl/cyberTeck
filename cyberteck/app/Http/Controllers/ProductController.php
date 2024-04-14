@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -13,20 +14,14 @@ class ProductController extends Controller
         return response()->json($products);
     }
 
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'category' => 'required|string|max:255',
-            'age_group' => 'required|integer',
-            'price' => 'required|numeric',
-            'stock_quantity' => 'required|integer',
-        ]);
-
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+        } else {
+            $imageName = '';
         }
 
         $product = Product::create($request->all());
@@ -44,7 +39,9 @@ class ProductController extends Controller
         return response()->json($product);
     }
 
-    public function update(Request $request, $id)
+
+
+    public function update(ProductRequest $request, $id)
     {
         $product = Product::find($id);
 
@@ -52,17 +49,8 @@ class ProductController extends Controller
             return response()->json(['message' => 'Product not found'], 404);
         }
 
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'category' => 'required|string|max:255',
-            'age_group' => 'required|integer',
-            'price' => 'required|numeric',
-            'stock_quantity' => 'required|integer',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+        if ($request->fails()) {
+            return response()->json($request->errors(), 400);
         }
 
         $product->update($request->all());
