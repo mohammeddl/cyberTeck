@@ -7,6 +7,7 @@ import NotFound from "../pages/notFound"
 import Layout from "../layouts/layout"
 import Blog from "../pages/blog"
 import Community from "../pages/community"
+import HomeComponent from "../pages/indexHome"
 
 export const router= createBrowserRouter([
 
@@ -14,8 +15,12 @@ export const router= createBrowserRouter([
 element:<Layout />,
 children:[
     {
-        path: '/',
+        path: '/home',
         element: <Home />
+    },
+    {
+        path: '/',
+        element: <HomeComponent />
     },
         {
         path: '/login',

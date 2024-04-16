@@ -1,134 +1,24 @@
-import { Fragment } from "react";
-import { Popover, Transition } from "@headlessui/react";
-import { MenuIcon, XIcon } from "@heroicons/react/outline";
-import { NavLink } from "react-router-dom";
-
-// const style: CSS.Properties = {
-//     backgroundImage: `url(${"https://cdn.devdojo.com/images/december2020/cta-bg.jpeg"})`,
-// };
+import Offers from "../components/ecommerce/Offers";
+import Hero from "../components/index/Hero";
 
 const HomeComponent = () => {
     return (
         <>
-            <div className="relative bg-white overflow-hidden">
-                <div className="max-w-7xl mx-auto">
-                    <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-                        <svg
-                            className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2"
-                            fill="currentColor"
-                            viewBox="0 0 100 100"
-                            preserveAspectRatio="none"
-                            aria-hidden="true"
-                        >
-                            <polygon points="50,0 100,0 50,100 0,100" />
-                        </svg>
-                        <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-                            <div className="sm:text-center lg:text-left">
-                                <h1 className="text-4xl tracking-tight font-extrabold text-[#100D3F] sm:text-5xl md:text-6xl">
-                                    <span className="block xl:inline">
-                                        Des solutions pour enrichir vos
-                                    </span>{" "}
-                                    <span className="block text-[#BA9672] xl:inline">
-                                        activités online
-                                    </span>
-                                </h1>
-                                <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                                    Anim aute id magna aliqua ad ad non deserunt
-                                    sunt. Qui irure qui lorem cupidatat commodo.
-                                    Elit sunt amet fugiat veniam occaecat fugiat
-                                    aliqua.
-                                </p>
-                                <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                                    <div className="rounded-md">
-                                        <NavLink
-                                            to="/register"
-                                            className="relative inline-block text-lg group"
-                                        >
-                                            <span className="relative z-10 block px-6 py-3 overflow-hidden font-medium leading-tight text-[#1c1761] transition-colors duration-300 ease-out border-2 border-[#100D3F] rounded-lg group-hover:text-white">
-                                                <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
-                                                <span className="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-[#100D3F] group-hover:-rotate-180 ease"></span>
-                                                <span className="relative">
-                                                    Commencer
-                                                </span>
-                                            </span>
-                                            <span
-                                                className="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-[#100D3F] rounded-lg group-hover:mb-0 group-hover:mr-0"
-                                                data-rounded="rounded-lg"
-                                            ></span>
-                                        </NavLink>
-                                    </div>
-                                    <div className="mt-3 sm:mt-0 sm:ml-3">
-                                        <NavLink
-                                            to="/contact"
-                                            className="relative inline-block text-lg group"
-                                        >
-                                            <span className="relative z-10 block px-6 py-3 overflow-hidden font-medium leading-tight text-[#d0aa84] transition-colors duration-300 ease-out border-2 border-[#BA9672] rounded-lg group-hover:text-white">
-                                                <span className="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
-                                                <span className="absolute left-0 w-48 h-48 -ml-2 transition-all duration-300 origin-top-right -rotate-90 -translate-x-full translate-y-12 bg-[#BA9672] group-hover:-rotate-180 ease"></span>
-                                                <span className="relative">
-                                                    Contactez-Nous
-                                                </span>
-                                            </span>
-                                            <span
-                                                className="absolute bottom-0 right-0 w-full h-12 -mb-1 -mr-1 transition-all duration-200 ease-linear bg-[#BA9672] rounded-lg group-hover:mb-0 group-hover:mr-0"
-                                                data-rounded="rounded-lg"
-                                            ></span>
-                                        </NavLink>
-                                    </div>
-                                </div>
-                            </div>
-                        </main>
-                    </div>
-                </div>
-                <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-                    <img
-                        className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-                        src="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"
-                        alt=""
-                    />
-                </div>
-            </div>
-
-            <section className="flex flex-col w-full bg-[#100D3F] md:flex-row">
-                <div className="relative w-full md:w-1/2">
-                    <img
-                        src="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"
-                        className="inset-0 object-cover"
-                        alt="side content"
-                    />
-                    <svg
-                        className="hidden lg:block absolute right-0 inset-y-0 h-full w-16 text-white transform translate-x-1/2"
-                        fill="currentColor"
-                        viewBox="00 0 100 100"
-                        preserveAspectRatio="none"
-                        aria-hidden="true"
-                    >
-                        <polygon points="50,0 100,0 50,100 0,100" />
-                    </svg>
-                </div>
-
-                <div className="flex flex-col items-center justify-center w-full p-10 md:w-1/2 lg:p-16 xl:p-24">
-                    <h2 className="max-w-lg text-4xl font-light leading-tight text-white md:text-3xl lg:text-4xl xl:text-5xl">
-                        Nous avons les outils dont vous avez besoin pour réussir
-                    </h2>
-                    <p className="max-w-lg mt-5 text-xl text-gray-500 md:text-base lg:text-xl">
-                        Our powerful and revolutionary tools are designed to
-                        help your business thrive.
-                    </p>
-                </div>
-            </section>
+            <Offers />
             <section className="relative block py-20 overflow-hidden leading-6 text-left text-indigo-900 bg-white">
                 <div className="w-full max-w-3xl px-16 mx-auto leading-6 text-left sm:px-12 md:px-8 xl:px-12">
                     <div className="relative w-full px-4 leading-6 text-center xl:flex-grow-0 xl:flex-shrink-0 lg:flex-grow-0 lg:flex-shrink-0">
                         <div className="box-border text-sm font-semibold text-[#BA9672] uppercase">
-                            hand-crafted components
+                        Featured Products Explore our handpicked selection
                         </div>
                         <h2 className="box-border mx-0 mt-6 mb-0 font-sans text-4xl font-bold leading-tight text-[#100D3F] sm:text-5xl md:text-6xl">
-                            Commencez à élaborer votre existance sur le web
+                           
+                            of featured gaming products:
                         </h2>
                     </div>
                 </div>
             </section>
+            <Hero/>
             <section className="bg-[#100D3F]">
                 <div className="relative px-16 pt-20 pb-32 mx-auto max-w-7xl xl:px-16">
                     <svg
@@ -263,38 +153,8 @@ const HomeComponent = () => {
                     </div>
                 </div>
             </section>
-            <section
-                className="relative py-24 bg-white bg-bottom bg-cover"
-                // style={style}
-            >
-                <div className="absolute inset-0 block w-full h-full opacity-25 bg-gradient-to-br from-transparent via-black to-transparent lg:hidden"></div>
-                <div className="flex flex-col items-center justify-between px-10 mx-auto max-w-7xl xl:px-12 lg:flex-row">
-                    <div className="relative mb-6 lg:mb-0">
-                        <h2 className="w-full mx-auto mb-2 text-4xl font-extrabold leading-none text-center text-white md:text-5xl xl:text-6xl lg:text-left">
-                            Conçu avec vous en tête.
-                        </h2>
-                        <p className="w-full max-w-3xl mx-auto text-base text-center text-gray-100 xl:text-xl lg:text-left">
-                            Nous avons créé à la main les meilleurs designs et
-                            modèles, optimisés pour la conversion.
-                        </p>
-                    </div>
-                    <NavLink
-                        to="/register"
-                        className="rounded relative px-10 py-5 inline-flex group items-center justify-center m-1 font-semibold text-xl cursor-pointer border-b-4 border-l-2 active:border-[#BA9672] active:shadow-none shadow-lg bg-gradient-to-tr from-[#BA9672] to-[#d0ab85] border-[#a48261] text-white"
-                    >
-                        <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
-                        <span className="relative">S'inscrire aujourd'hui</span>
-                    </NavLink>
-                </div>
-            </section>
         </>
     );
 };
 
 export default HomeComponent;
-
-const navigation = [
-    { name: "Accueil", href: "/" },
-    { name: "à propos", href: "/about" },
-    { name: "Contacter", href: "/contact" },
-];
