@@ -66,23 +66,9 @@ export default function Hero() {
     
 
     return (
-        <section className="w-full h-auto flex flex-col items-center justify-center relative lg:px-24 md:px-20 px-6 my-20">
-            <Text
-                as="p"
-                className="font-light text-base text-color3/80 tracking-widest"
-            >
-                test
-            </Text>
-
-            <Text
-                as="h2"
-                className="md:text-4xl text-2xl font-medium capitalize text-color3"
-            >
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, rerum.
-            </Text>
-
+        <section className="w-full h-auto flex flex-col items-center justify-center relative lg:px-24 md:px-20 px-6 mb-20">
             {/* Controllers  */}
-            <div className="mt-12 w-full flex justify-end gap-5 items-center md:px-6 px-3">
+            <div className="mt- w-full flex justify-end gap-5 items-center md:px-6 px-3">
                 <Button
                     onClick={previous}
                     className="cursor-pointer outline-none border-none bg-color2/30 text-color3 hover:bg-color2 p-2 rounded-full"
@@ -144,7 +130,7 @@ export default function Hero() {
                                         color="red"
                                         variant="text"
                                         className=" "
-                                        onClick={() => addToList(cardOffer.id)}
+                                        // onClick={() => addToList(cardOffer.id)}
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"

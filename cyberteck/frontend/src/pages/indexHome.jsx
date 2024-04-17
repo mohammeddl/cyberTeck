@@ -5,7 +5,7 @@ const HomeComponent = () => {
     return (
         <>
             <Offers />
-            <section className="relative block py-20 overflow-hidden leading-6 text-left text-indigo-900 bg-white">
+            <section className="relative block pt-10 overflow-hidden leading-6 text-left text-indigo-900 bg-white">
                 <div className="w-full max-w-3xl px-16 mx-auto leading-6 text-left sm:px-12 md:px-8 xl:px-12">
                     <div className="relative w-full px-4 leading-6 text-center xl:flex-grow-0 xl:flex-shrink-0 lg:flex-grow-0 lg:flex-shrink-0">
                         <div className="box-border text-sm font-semibold text-[#BA9672] uppercase">
@@ -13,7 +13,7 @@ const HomeComponent = () => {
                         </div>
                         <h2 className="box-border mx-0 mt-6 mb-0 font-sans text-4xl font-bold leading-tight text-[#100D3F] sm:text-5xl md:text-6xl">
                            
-                            of featured gaming products:
+                            Of featured gaming products:
                         </h2>
                     </div>
                 </div>
