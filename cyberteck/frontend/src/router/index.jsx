@@ -5,6 +5,7 @@ import Signup from "../pages/signup";
 import Users from "../pages/users";
 import NotFound from "../pages/notFound";
 import Layout from "../layouts/layout";
+import LayoutAdmin from "../layouts/layoutAdmin";
 import Blog from "../pages/blog";
 import Community from "../pages/community";
 import HomeComponent from "../pages/indexHome";
@@ -46,9 +47,23 @@ export const router = createBrowserRouter([
                 path: "/community",
                 element: <Community />,
             },
+        ],
+    },
+    
+    {
+        element: <LayoutAdmin />,
+        children: [
             {
                 path: "/dashboard",
                 element: <Dashoard />,
+            },
+            {
+                path: "/products",
+                element: "",
+            },
+            {
+                path: "/blogs",
+                element: "",
             },
         ],
     },
