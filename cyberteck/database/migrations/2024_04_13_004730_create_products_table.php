@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->string('category');
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->integer('stock_quantity');
             $table->integer('price');
             $table->timestamps();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

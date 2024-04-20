@@ -130,7 +130,7 @@ export default function Stats() {
                             44
                         </h3>
                         <p className="mt-1 text-sm text-gray-500">
-                            Total Events
+                            Total Posts
                         </p>
                     </div>
                 </div>

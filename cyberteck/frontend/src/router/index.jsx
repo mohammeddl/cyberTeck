@@ -10,6 +10,7 @@ import Blog from "../pages/blog";
 import Community from "../pages/community";
 import HomeComponent from "../pages/indexHome";
 import Dashoard from "../pages/dashboard";
+import DashboardProduct from "../pages/dashboardProduct";
 
 export const router = createBrowserRouter([
     {
@@ -59,7 +60,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/products",
-                element: "",
+                element: <DashboardProduct/>,
             },
             {
                 path: "/blogs",
