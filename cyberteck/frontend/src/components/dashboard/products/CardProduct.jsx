@@ -10,6 +10,7 @@ import {
 } from "@material-tailwind/react";
 import Swal from "sweetalert2";
 import { axiosClient } from "../../../api/axios";
+import EditProductModel from "./EditProductModel";
 
 
 export default function CardProduct() {
@@ -69,14 +70,14 @@ export default function CardProduct() {
     };
     return (
         <div className=" mx-16 flex flex-wrap gap-5 ">
-            {/* <EditItineraryModel
+            <EditProductModel
                 isOpen={isOpen}
                 closeModel={() => {
                     fetchData();
                     setIsOpen(false);
                 }}
-                itinerary={productes[indexEdit]}
-            /> */}
+                product={productes[indexEdit]}
+            />
             {productes.map((product, index) => (
                 <div className="" key={product.id}>
                     <Card className=" max-w-[23rem] shadow-lg flex">
