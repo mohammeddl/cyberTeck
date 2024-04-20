@@ -30,12 +30,7 @@ class UserController extends Controller
         }
     }
 
-    public function test(){
-        return response()->json([
-            'yess'=>'yes is working',
-            'stuts'=>true
-        ],200);
-    }
+
 
     public function login(Request $request)
     {

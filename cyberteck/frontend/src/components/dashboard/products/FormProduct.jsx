@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
 import AddProductModel from "./AddProductModel";
-import { UserCircleIcon } from "lucide-react";
 import { axiosClient } from "../../../api/axios";
 
 export default function FormProduct() {
-    const [categories, setCategories] = useState({});
+    const [categories, setCategories] = useState([]);
 
+    const fetchCategories = async () => {
+        const response = await axiosClient.get(
+            "http://localhost:8000/api/categories"
+        );
+        setCategories(response.data.categories);
+    };
     useEffect(() => {
-        const fetchCategories = async () => {
-            const response = await fetch(
-                "http://localhost:8000/api/categories"
-            );
-            const data = await response.json();
-            setCategories(data);
-        };
         fetchCategories();
     }, []);
 
@@ -24,22 +22,30 @@ export default function FormProduct() {
         category: "",
         price: "",
         stock: "",
+        image: null,
     });
 
     const handleChange = async (e) => {
         e.preventDefault();
+
+        const updatedFormData = { ...formData };
+        updatedFormData[e.target.name] = e.target.value;
+        setFormData(updatedFormData);
+
         try {
             const data = new FormData();
             data.append("name", formData.name);
-            data.append("description", formData.description);
-            data.append("category", formData.category);
-            data.append("price", formData.price);
-            data.append("stock", formData.stock);
+            data.append("description", updatedFormData.description);
+            data.append("category_id", updatedFormData.category);
+            data.append("price", updatedFormData.price);
+            data.append("stock_quantity", updatedFormData.stock);
+            data.append("image", updatedFormData.image[0]);
+
+            console.log(updatedFormData);
 
             const response = await axiosClient.post(
                 "http://localhost:8000/api/products",
-                data,
-                {
+                data,{
                     headers: {
                         "Content-Type": "multipart/form-data",
                     },
@@ -54,7 +60,14 @@ export default function FormProduct() {
     };
 
     const handleI = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.files[0] });
+        const updatedFormData = { ...formData };
+        updatedFormData[e.target.name] = e.target.value;
+        setFormData(updatedFormData);
+    };
+
+    const handelImage = (e) => {
+        const file = e.target.files[0];
+        setFormData((prevData) => ({ ...prevData, image: file }));
     };
 
     return (
@@ -72,27 +85,27 @@ export default function FormProduct() {
                 <form className="space-y-6 m-12" onSubmit={handleChange}>
                     <div>
                         <label
-                            for="file"
+                            htmlFor="file"
                             className="block text-sm text-gray-500 dark:text-gray-300"
                         >
                             File
                         </label>
 
                         <label
-                            for="dropzone-file"
+                            htmlFor="dropzone-file"
                             className="flex flex-col items-center w-full max-w-lg p-5 mx-auto mt-2 text-center bg-white border-2 border-gray-300 border-dashed cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
-                                stroke-width="1.5"
+                                strokeWidth="1.5"
                                 stroke="currentColor"
                                 className="w-8 h-8 text-gray-500 dark:text-gray-400"
                             >
                                 <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
                                     d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
                                 />
                             </svg>
@@ -102,18 +115,19 @@ export default function FormProduct() {
                             </h2>
 
                             <p className="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">
-                                Upload or darg & drop your file SVG, PNG, JPG or
-                                GIF.{" "}
+                                Upload or drag & drop your file SVG, PNG, JPG,
+                                or GIF.
                             </p>
 
                             <input
                                 id="dropzone-file"
                                 type="file"
                                 className="hidden"
-                                onChange={handleI}
+                                onChange={handelImage}
                             ></input>
                         </label>
                     </div>
+
                     <div className="col-span-full">
                         <label
                             htmlFor="name"
@@ -165,9 +179,14 @@ export default function FormProduct() {
                                 name="category"
                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                             >
-                                <option>Select category</option>
-                                <option>Category 1</option>
-                                <option>Category 2</option>
+                                {categories.map((category) => (
+                                    <option
+                                        value={category.id}
+                                        key={category.id}
+                                    >
+                                        {category.category_name}
+                                    </option>
+                                ))}
                             </select>
                         </div>
                     </div>

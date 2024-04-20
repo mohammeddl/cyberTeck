@@ -10,22 +10,30 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
-        return response()->json($products);
+       try{
+            $products = Product::all();
+            return response()->json(['products' => $products], 200);
+        }catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+       }
     }
 
     public function store(ProductRequest $request)
     {
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-        } else {
-            $imageName = '';
-        }
+        try{
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images'), $imageName);
+            } else {
+                $imageName = '';
+            }
+            $product = Product::create($request->all());
+            return response()->json($product, 201);
 
-        $product = Product::create($request->all());
-        return response()->json($product, 201);
+        }catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     public function show($id)
@@ -59,13 +67,19 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
-        $product = Product::find($id);
+        try{
+            $product = Product::find($id);
 
-        if (!$product) {
-            return response()->json(['message' => 'Product not found'], 404);
+            if (!$product) {
+                return response()->json(['message' => 'Product not found'], 404);
+            }
+
+            $product->delete();
+            return response()->json(['message' => 'Product deleted'], 200);
+        }catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
         }
 
-        $product->delete();
-        return response()->json(['message' => 'Product deleted successfully'], 200);
+    
     }
 }
