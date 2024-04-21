@@ -4,7 +4,7 @@ import { axiosClient } from "../../api/axios";
 
 
 
-const products = [
+const productsold = [
     {
         id: 1,
         name: "Throwback Hip Bag",
@@ -34,9 +34,17 @@ const products = [
 
 export default function ShoppingCarts() {
     const [open, setOpen] = useState(true);
+    const [products, setProducts] = useState([]);
 
+    useEffect(() => {
+        // Retrieve cart data from local storage
+        const cart = localStorage.getItem("cart")
+            ? JSON.parse(localStorage.getItem("cart"))
+            : [];
 
-
+        // Set the products state with the cart data
+        setProducts(cart);
+    }, []);
 
 
     return (
@@ -152,6 +160,14 @@ export default function ShoppingCarts() {
 
                                                                             <div className="flex">
                                                                                 <button
+                                                                                onClick={() => {
+                                                                                    // Remove product from cart
+                                                                                    const updatedCart = products.filter((item) => item.id !== product.id);
+                                                                                    setProducts(updatedCart);
+                                                                                    
+                                                                                    // Update local storage
+                                                                                    localStorage.setItem("cart", JSON.stringify(updatedCart));
+                                                                                }}
                                                                                     type="button"
                                                                                     className="font-medium text-indigo-600 hover:text-indigo-500"
                                                                                 >
