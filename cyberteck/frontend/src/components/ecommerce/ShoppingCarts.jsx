@@ -2,11 +2,10 @@ import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { X } from "lucide-react";
 
-export default function ShoppingCarts({ isOpen, setOpen}) {
+export default function ShoppingCarts({ isOpen, setOpen }) {
     const [products, setProducts] = useState([]);
     const [price, setPrice] = useState(0);
 
-    
     useEffect(() => {
         const cart = localStorage.getItem("cart")
             ? JSON.parse(localStorage.getItem("cart"))
@@ -89,7 +88,7 @@ export default function ShoppingCarts({ isOpen, setOpen}) {
                                                     Shopping cart
                                                 </Dialog.Title>
                                                 <div className="ml-3 flex h-7 items-center">
-                                                <X 
+                                                    <X
                                                         type="button"
                                                         className="relative -m-2 p-2 h-11 w-16 cursor-pointer"
                                                         onClick={() =>
@@ -168,14 +167,14 @@ export default function ShoppingCarts({ isOpen, setOpen}) {
                                                                                     type="button"
                                                                                     className="px-2 font-medium text-gray-600 hover:text-gray-700"
                                                                                 >
-                                                                                    -{" "} 
+                                                                                    -{" "}
                                                                                 </button>
-                                                                            <p className="text-gray-500">
-                                                                            Qty{" "}
-                                                                                {
-                                                                                    product.quantity
-                                                                                }
-                                                                            </p>
+                                                                                <p className="text-gray-500">
+                                                                                    Qty{" "}
+                                                                                    {
+                                                                                        product.quantity
+                                                                                    }
+                                                                                </p>
                                                                                 <button
                                                                                     onClick={() =>
                                                                                         updateQuantity(
