@@ -15,27 +15,39 @@ const productsOlde = [
     },
 ];
 
-
-
 export default function ListCard() {
+    const [products, setProducts] = useState(productsOlde);
 
-   const [products, setProducts] = useState(productsOlde);
-
-   const fetchData = async () => {
-         try {
-              const response = await axiosClient.get("/api/products");
-              console.log(response.data.products);
-              setProducts(response.data.products);
-         } catch (error) {
-              console.error("Error fetching products:", error);
-         }
-    }
+    const fetchData = async () => {
+        try {
+            const response = await axiosClient.get("/api/products");
+            console.log(response.data.products);
+            setProducts(response.data.products);
+        } catch (error) {
+            console.error("Error fetching products:", error);
+        }
+    };
     useEffect(() => {
-         fetchData();
+        fetchData();
     }, []);
 
-    
+    const addToCart = (product) => {
+        let cart = localStorage.getItem("cart")
+            ? JSON.parse(localStorage.getItem("cart"))
+            : [];
 
+        // Check if the product is already in the cart
+        const existingProduct = cart.find((item) => item.id === product.id);
+        if (existingProduct) {
+            // If the product is already in the cart, increase its quantity
+            existingProduct.quantity += 1;
+        } else {
+            // If the product is not in the cart, add it with a quantity of 1
+            cart.push({ ...product, quantity: 1 });
+        }
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+    };
 
 
     return (
@@ -51,7 +63,10 @@ export default function ListCard() {
                             <div className="relative">
                                 <div className="relative w-full h-72 rounded-lg overflow-hidden">
                                     <img
-                                        src={"http://localhost:8000/images/"+product.image}
+                                        src={
+                                            "http://localhost:8000/images/" +
+                                            product.image
+                                        }
                                         alt={product.imageAlt}
                                         className="w-full h-full object-center object-cover"
                                     />
@@ -70,7 +85,7 @@ export default function ListCard() {
                                         className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black opacity-50"
                                     />
                                     <p className="relative text-lg font-semibold text-white">
-                                        {product.price+" USD"}
+                                        {product.price + " USD"}
                                     </p>
                                 </div>
                             </div>
@@ -78,9 +93,9 @@ export default function ListCard() {
                                 <div
                                     href={product.href}
                                     className="relative flex cursor-pointer bg-gray-100 border border-transparent rounded-md py-2 px-8 items-center justify-center text-sm font-medium text-gray-900 hover:bg-gray-200"
+                                    onClick={() => addToCart(product)}
                                 >
                                     Add to bag
-                                    
                                 </div>
                             </div>
                         </div>

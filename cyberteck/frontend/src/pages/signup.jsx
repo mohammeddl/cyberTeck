@@ -42,30 +42,44 @@ export default function Signup() {
     const {
         formState: { isSubmitting },
     } = form;
-    
-    const onSubmitRegister = async (values) => {
 
-        console.log(values);
-        const data = await axiosClient
-            .post("/api/register", values, {
+    const { setUser } = useUserContext();
+
+    const onSubmitRegister = async (values) => {
+        try {
+            const response = await axiosClient.post("/api/register", values, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
-            })
-            .then((value) => {
-                console.log(value);
-                if (value.status === 200) {
-                    // navigate(home);
-                }
-            })
-            .catch(({ response }) => {
-                console.log(response.data.message);
-                form.setError("email", {
-                    message: response.data.message,
-                });
             });
-    }
-    
+console.log("Attempting to register with:", values);
+
+            if (response.status === 200) {
+                window.localStorage.setItem(
+                    "ACCESS_TOKEN",
+                    response.data.access_token
+                );
+                window.localStorage.setItem(
+                    "USER",
+                    JSON.stringify(response.data.user)
+                );
+
+                console.log("Setting user in context...");
+                setUser(response.data.user);
+
+                console.log("Navigating to dashboard...");
+                navigate(home);
+            }
+        } catch (error) {
+            if (error.response) {
+                form.setError("email", {
+                    message: error.response.data.message,
+                });
+                console.log(error.response);
+            }
+        }
+    };
+
     return (
         <>
             <Form {...form}>

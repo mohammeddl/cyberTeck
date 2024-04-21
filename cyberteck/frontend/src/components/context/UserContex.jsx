@@ -50,7 +50,7 @@ export default function UserContext({ children }) {
                 password
             );
 
-            console.log("API Response after registration:", response); // Log the API response
+            console.log("API Response after registration:", response);
 
             if (response && response.data) {
                 setUser(response.data.user);
@@ -63,6 +63,7 @@ export default function UserContext({ children }) {
                     JSON.stringify(response.data.user)
                 );
             }
+            
 
             return response;
         } catch (error) {
