@@ -1,9 +1,8 @@
 import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { axiosClient } from "../../api/axios";
+import { X } from "lucide-react";
 
-export default function ShoppingCarts() {
-    const [open, setOpen] = useState(true);
+export default function ShoppingCarts({ isOpen, setOpen}) {
     const [products, setProducts] = useState([]);
     const [price, setPrice] = useState(0);
 
@@ -56,7 +55,7 @@ export default function ShoppingCarts() {
     };
 
     return (
-        <Transition.Root show={open} as={Fragment}>
+        <Transition.Root show={isOpen} as={Fragment}>
             <Dialog as="div" className="relative z-10" onClose={setOpen}>
                 <Transition.Child
                     as={Fragment}
@@ -90,9 +89,9 @@ export default function ShoppingCarts() {
                                                     Shopping cart
                                                 </Dialog.Title>
                                                 <div className="ml-3 flex h-7 items-center">
-                                                    <button
+                                                <X 
                                                         type="button"
-                                                        className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
+                                                        className="relative -m-2 p-2 h-11 w-16 cursor-pointer"
                                                         onClick={() =>
                                                             setOpen(false)
                                                         }
@@ -101,7 +100,7 @@ export default function ShoppingCarts() {
                                                         <span className="sr-only">
                                                             Close panel
                                                         </span>
-                                                    </button>
+                                                    </X>
                                                 </div>
                                             </div>
 
