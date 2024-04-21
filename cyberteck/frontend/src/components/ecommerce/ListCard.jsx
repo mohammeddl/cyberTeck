@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { axiosClient } from "../../api/axios";
+import { useNavigate } from 'react-router-dom';
 
 const productsOlde = [
     {
@@ -16,6 +17,9 @@ const productsOlde = [
 ];
 
 export default function ListCard() {
+    const navigate = useNavigate();
+
+
     const [products, setProducts] = useState(productsOlde);
 
     const fetchData = async () => {
@@ -89,13 +93,23 @@ export default function ListCard() {
                                     </p>
                                 </div>
                             </div>
-                            <div className="mt-6">
+                            <div className="mt-6 flex gap-4">
                                 <div
                                     href={product.href}
-                                    className="relative flex cursor-pointer bg-gray-100 border border-transparent rounded-md py-2 px-8 items-center justify-center text-sm font-medium text-gray-900 hover:bg-gray-200"
+                                    className="relative flex cursor-pointer bg-gray-100 border border-transparent rounded-md py-2 px-6 items-center justify-center text-sm font-medium text-gray-900 hover:bg-gray-200"
                                     onClick={() => addToCart(product)}
                                 >
                                     Add to bag
+                                </div>
+                                <div
+                                    href={product.href}
+                                    className="relative flex cursor-pointer bg-gray-100 border border-transparent rounded-md py-2 px-8 items-center justify-center text-sm font-medium text-gray-900 hover:bg-gray-200"
+                                    onClick={() => {
+                                        
+                                        navigate(`/learn_more/${product.id}`);
+                                    }}
+                                >
+                                    Learn more
                                 </div>
                             </div>
                         </div>

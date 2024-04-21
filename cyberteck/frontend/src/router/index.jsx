@@ -10,6 +10,7 @@ import Community from "../pages/community";
 import HomeComponent from "../pages/indexHome";
 import Dashoard from "../pages/dashboard";
 import DashboardProduct from "../pages/dashboardProduct";
+import ListReviews from "../components/ecommerce/ListReviews";
 
 export const home = "/home";
 
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
             {
                 path: "/community",
                 element: <Community />,
+            },
+            {
+                path: "/learn_more/:productId",
+                element: <ListReviews/>,
             },
         ],
     },

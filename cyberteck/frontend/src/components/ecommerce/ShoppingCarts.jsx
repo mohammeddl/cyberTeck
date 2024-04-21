@@ -7,17 +7,53 @@ export default function ShoppingCarts() {
     const [products, setProducts] = useState([]);
     const [price, setPrice] = useState(0);
 
+    
     useEffect(() => {
         const cart = localStorage.getItem("cart")
             ? JSON.parse(localStorage.getItem("cart"))
             : [];
         setProducts(cart);
         const total = cart.reduce((acc, item) => {
-            const price = typeof item.price === 'string' ? item.price.replace("$", "") : item.price;
+            const price =
+                typeof item.price === "string"
+                    ? item.price.replace("$", "")
+                    : item.price;
             return acc + parseFloat(price);
         }, 0);
         setPrice(total);
     }, []);
+
+    const updateQuantity = (productId, operation) => {
+        const updatedCart = products.map((item) => {
+            if (item.id === productId) {
+                if (operation === "add") {
+                    return {
+                        ...item,
+                        quantity: item.quantity + 1,
+                    };
+                } else if (operation === "subtract" && item.quantity > 1) {
+                    return {
+                        ...item,
+                        quantity: item.quantity - 1,
+                    };
+                }
+            }
+            return item;
+        });
+
+        setProducts(updatedCart);
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+        // Recalculate total price
+        const total = updatedCart.reduce((acc, item) => {
+            const price =
+                typeof item.price === "string"
+                    ? item.price.replace("$", "")
+                    : item.price;
+            return acc + parseFloat(price) * item.quantity;
+        }, 0);
+        setPrice(total);
+    };
 
     return (
         <Transition.Root show={open} as={Fragment}>
@@ -122,12 +158,38 @@ export default function ShoppingCarts() {
                                                                             </p>
                                                                         </div>
                                                                         <div className="flex flex-1 items-end justify-between text-sm">
+                                                                            <div className="flex">
+                                                                                <button
+                                                                                    onClick={() =>
+                                                                                        updateQuantity(
+                                                                                            product.id,
+                                                                                            "subtract"
+                                                                                        )
+                                                                                    }
+                                                                                    type="button"
+                                                                                    className="px-2 font-medium text-gray-600 hover:text-gray-700"
+                                                                                >
+                                                                                    -{" "} 
+                                                                                </button>
                                                                             <p className="text-gray-500">
-                                                                                Qty{" "}
+                                                                            Qty{" "}
                                                                                 {
                                                                                     product.quantity
                                                                                 }
                                                                             </p>
+                                                                                <button
+                                                                                    onClick={() =>
+                                                                                        updateQuantity(
+                                                                                            product.id,
+                                                                                            "add"
+                                                                                        )
+                                                                                    }
+                                                                                    type="button"
+                                                                                    className="font-medium text-gray-600 hover:text-gray-700 ml-2"
+                                                                                >
+                                                                                    +
+                                                                                </button>
+                                                                            </div>
 
                                                                             <div className="flex">
                                                                                 <button
@@ -169,7 +231,7 @@ export default function ShoppingCarts() {
                                         <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                                             <div className="flex justify-between text-base font-medium text-gray-900">
                                                 <p>Subtotal</p>
-                                                <p>${price.toFixed(2)}</p> 
+                                                <p>${price.toFixed(2)}</p>
                                             </div>
                                             <p className="mt-0.5 text-sm text-gray-500">
                                                 Shipping and taxes calculated at
