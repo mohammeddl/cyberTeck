@@ -28,7 +28,14 @@ class ProductController extends Controller
             } else {
                 $imageName = '';
             }
-            $product = Product::create($request->all());
+            $product = Product::create([
+                'name' => $request->name,
+                'price' => $request->price,
+                'image' => $imageName,
+                'description' => $request->description,
+                'category_id' => $request->category_id,
+                'stock_quantity'=>$request->stock_quantity
+            ]);
             return response()->json($product, 201);
 
         }catch (\Exception $e) {
@@ -47,23 +54,70 @@ class ProductController extends Controller
         return response()->json($product);
     }
 
+    // public function update(ProductRequest $request, $id)
+    // {
+    //     try{
+    //         $product = Product::find($id);
 
+    //         if (!$product) {
+    //             return response()->json(['message' => 'Product not found'], 404);
+    //         }
 
-    public function update(ProductRequest $request, $id)
+    //         dd($request->all());
+    //        $product->update([
+    //             'name' => $request->name,
+    //             'price' => $request->price,
+    //             'description' => $request->description,
+    //             'category_id' => $request->category_id,
+    //             'stock_quantity'=>$request->stock_quantity,
+    //             'image' => $request->image
+    //         ]);
+
+    //         return response()->json(['product' => $product], 200);
+    //     }catch (\Exception $e) {
+    //         return response()->json(['error' => $e->getMessage()], 500);
+    //     }
+    // }
+
+    public function update(Request $request ,$id)
     {
-        $product = Product::find($id);
+        try {
+            $product = Product::findOrFail($id);
 
-        if (!$product) {
-            return response()->json(['message' => 'Product not found'], 404);
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images'), $imageName);
+
+                if ($product->image && file_exists(public_path('images/' . $product->image))) {
+                    unlink(public_path('images/' . $product->image));
+                }
+            } else {
+                $imageName = $product->image;
+            }
+
+            $product->update([
+                'name' => $request->name,
+                'price' => $request->price,
+                'description' => $request->description,
+                'category_id' => $request->category_id,
+                'stock_quantity' => $request->stock_quantity,
+                'image' => $imageName
+            ]);
+
+            
+
+            return response()->json([
+                'itinerary' => $product,
+                'message' => 'product updated successfully'
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
         }
-
-        if ($request->fails()) {
-            return response()->json($request->errors(), 400);
-        }
-
-        $product->update($request->all());
-        return response()->json($product, 200);
     }
+
+
+   
 
     public function destroy($id)
     {

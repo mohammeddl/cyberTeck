@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
@@ -10,21 +10,36 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function register(UserRequest $request)
-    {
+    public function register(UserRequest $request){
         try {
 
             $validatedData = $request->validated();
             $validatedData['password'] = Hash::make($validatedData['password']);
 
-            $user = User::create($validatedData);
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images'), $imageName);
+            } else {
+                $imageName = '';
+            }
+
+            $user = User::create([
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+                'password' => $validatedData['password'],
+                'image' => $imageName
+            ]);
+
             $accessToken = $user->createToken('authToken')->plainTextToken;
+
             return response()->json([
                 'access_token' => $accessToken,
                 'user' => $user,
                 'status' => true,
-                'message' => 'user has created Successfully'
+                'message' => 'User created successfully'
             ], 201);
+            
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }

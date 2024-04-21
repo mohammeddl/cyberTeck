@@ -19,7 +19,7 @@ export default function FormProduct() {
     const [formData, setFormData] = useState({
         name: "",
         description: "",
-        category: "",
+        category_id: "",
         price: "",
         stock: "",
         image: null,
@@ -27,47 +27,53 @@ export default function FormProduct() {
 
     const handleChange = async (e) => {
         e.preventDefault();
-
-        const updatedFormData = { ...formData };
-        updatedFormData[e.target.name] = e.target.value;
-        setFormData(updatedFormData);
-
+    
         try {
             const data = new FormData();
             data.append("name", formData.name);
-            data.append("description", updatedFormData.description);
-            data.append("category_id", updatedFormData.category);
-            data.append("price", updatedFormData.price);
-            data.append("stock_quantity", updatedFormData.stock);
-            data.append("image", updatedFormData.image[0]);
-
-            console.log(updatedFormData);
-
+            data.append("description", formData.description);
+            data.append("category_id", formData.category_id); // Make sure formData.category is correct
+            data.append("price", formData.price);
+            data.append("stock_quantity", formData.stock);
+            data.append("image", formData.image);
+            console.log([...data.entries()]);
+    
             const response = await axiosClient.post(
                 "http://localhost:8000/api/products",
-                data,{
+                data,  {
                     headers: {
                         "Content-Type": "multipart/form-data",
                     },
                 }
             );
-            if (response.status === 200) {
+            
+            if (response.status === 201) { // Check for 201 instead of 200 for POST request
+                console.log(response.data);
                 console.log("product added successfully");
+
             }
         } catch (error) {
             console.log(error);
         }
     };
+    
+    
 
     const handleI = (e) => {
         const updatedFormData = { ...formData };
         updatedFormData[e.target.name] = e.target.value;
+    
+        // Special handling for category dropdown
+        if (e.target.name === 'category') {
+            updatedFormData['category_id'] = e.target.value;
+        }
+    
         setFormData(updatedFormData);
     };
 
     const handelImage = (e) => {
         const file = e.target.files[0];
-        setFormData((prevData) => ({ ...prevData, image: file }));
+        setFormData((prevData) => ({ ...prevData, image: file, }));
     };
 
     return (
@@ -175,6 +181,7 @@ export default function FormProduct() {
                         <div className="mt-2">
                             <select
                                 onChange={handleI}
+                                value={formData.category_id}
                                 id="category"
                                 name="category"
                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"

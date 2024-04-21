@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
+import { axiosClient } from "../../api/axios";
 
-const products = [
+const productsOlde = [
     {
         id: 1,
         name: "Zip Tote Basket",
@@ -13,7 +15,29 @@ const products = [
     },
 ];
 
+
+
 export default function ListCard() {
+
+   const [products, setProducts] = useState(productsOlde);
+
+   const fetchData = async () => {
+         try {
+              const response = await axiosClient.get("/api/products");
+              console.log(response.data.products);
+              setProducts(response.data.products);
+         } catch (error) {
+              console.error("Error fetching products:", error);
+         }
+    }
+    useEffect(() => {
+         fetchData();
+    }, []);
+
+    
+
+
+
     return (
         <div className="bg-white">
             <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -27,7 +51,7 @@ export default function ListCard() {
                             <div className="relative">
                                 <div className="relative w-full h-72 rounded-lg overflow-hidden">
                                     <img
-                                        src={product.imageSrc}
+                                        src={"http://localhost:8000/images/"+product.image}
                                         alt={product.imageAlt}
                                         className="w-full h-full object-center object-cover"
                                     />
@@ -36,9 +60,9 @@ export default function ListCard() {
                                     <h3 className="text-sm font-medium text-gray-900">
                                         {product.name}
                                     </h3>
-                                    <p className="mt-1 text-sm text-gray-500">
+                                    {/* <p className="mt-1 text-sm text-gray-500">
                                         {product.color}
-                                    </p>
+                                    </p> */}
                                 </div>
                                 <div className="absolute top-0 inset-x-0 h-72 rounded-lg p-4 flex items-end justify-end overflow-hidden">
                                     <div
@@ -46,20 +70,18 @@ export default function ListCard() {
                                         className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black opacity-50"
                                     />
                                     <p className="relative text-lg font-semibold text-white">
-                                        {product.price}
+                                        {product.price+" USD"}
                                     </p>
                                 </div>
                             </div>
                             <div className="mt-6">
-                                <a
+                                <div
                                     href={product.href}
-                                    className="relative flex bg-gray-100 border border-transparent rounded-md py-2 px-8 items-center justify-center text-sm font-medium text-gray-900 hover:bg-gray-200"
+                                    className="relative flex cursor-pointer bg-gray-100 border border-transparent rounded-md py-2 px-8 items-center justify-center text-sm font-medium text-gray-900 hover:bg-gray-200"
                                 >
                                     Add to bag
-                                    <span className="sr-only">
-                                        , {product.name}
-                                    </span>
-                                </a>
+                                    
+                                </div>
                             </div>
                         </div>
                     ))}

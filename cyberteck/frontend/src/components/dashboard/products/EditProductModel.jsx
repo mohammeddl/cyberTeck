@@ -11,40 +11,42 @@ export default function EditProductModel({ isOpen, closeModel, product }) {
         formState: { errors },
     } = useForm();
 
+
     const onSubmit = async (data) => {
-        try {
-            const submitData = new FormData();
-            submitData.append("_method", "put");
-            submitData.append("title", data.title);
-            submitData.append("category_id", data.category_id);
-            submitData.append("image", data.image[0]);
-            submitData.append("duration", data.duration);
-            for (const value of submitData.values()) {
-                console.log(value);
-            }
+const formData = new FormData();
+formData.append("_method", "PUT");
+formData.append("image", data.image[0]);
+formData.append("name", data.name);
+formData.append("description", data.description);
+formData.append("category_id", data.category_id);
+formData.append("price", data.price);
+formData.append("stock_quantity", data.stock_quantity);
+console.log("Sending FormData:", formData);
 
-            const response = await axiosClient.post(
-                `/api/itinerary/${product.id}/edit`,
-                submitData,
-                {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                    },
-                }
-            );
-            if (response.status === 200) {
-                console.log("product updated successfully");
-                console.log(response.data);
-                closeModel();
-            } else {
-                console.error("Failed to update product");
-            }
-        } catch (error) {
-            console.error("Error updating product:", error);
-        }
-    };
+console.log("Name field value:", data.name);
 
-    const [categories, setCategories] = useState([]);
+
+try {
+const response = await axiosClient.put( `/api/products/${product.id}`, formData, {
+headers: {
+"Content-Type": "multipart/form-data",
+},
+});
+if (response.status === 201) {
+    console.log("Product updated successfully");
+closeModel();
+}
+} catch (error) {
+console.error("Error updating product:", error);
+console.error("Error updating product:", error.response ? error.response.data : error);
+}
+};
+
+
+
+    
+    
+        const [categories, setCategories] = useState([]);
     const getCategories = async () => {
         try {
             const response = await axiosClient.get("/api/categories");
@@ -111,7 +113,7 @@ export default function EditProductModel({ isOpen, closeModel, product }) {
                             <input
                                 id="dropzone-file"
                                 type="file"
-                                className="hidden"
+                                className=""
                                 {...register("image", { required: true })}
                             />
                             {errors.image && (
@@ -171,12 +173,12 @@ export default function EditProductModel({ isOpen, closeModel, product }) {
                         </label>
                         <div className="mt-2">
                             <select
-                                {...register("category_id", {
-                                    required: true,
-                                })}
                                 id="category"
                                 name="category"
                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                                {...register("category_id", {
+                                    required: true,
+                                })}
                             >
                                 {categories.map((category) => (
                                     <option

@@ -1,5 +1,6 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { axiosClient } from "../../api/axios";
 
 
 
@@ -33,6 +34,10 @@ const products = [
 
 export default function ShoppingCarts() {
     const [open, setOpen] = useState(true);
+
+
+
+
 
     return (
         <Transition.Root show={open} as={Fragment}>

@@ -16,8 +16,9 @@ import {
 import { Input } from "@/components/ui/input"
 import { axiosClient } from "../api/axios";
 import { useNavigate } from "react-router-dom";
-import Users from "../pages/users";
+
 import {Loader2} from "lucide-react";
+import { home } from "../router";
 
 export default function UserLogin() {
     const formSchema = z.object({
@@ -41,8 +42,9 @@ export default function UserLogin() {
             await axiosClient.get('/sanctum/csrf-cookie');
             const data = await axiosClient.post('/api/login', values).then(
                 (value)=>{
+                  console.log(value)
                     if(value.status === 200){
-                        navigate(Users)
+                        navigate(home)
                     }
                 }
             ).catch(({response})=>{
