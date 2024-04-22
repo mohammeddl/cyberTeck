@@ -58,6 +58,7 @@ export default function ShoppingCarts({ isOpen, setOpen }) {
         setOpen(true);
     };
     
+    console.log(price.toFixed(2))
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>
@@ -244,9 +245,9 @@ export default function ShoppingCarts({ isOpen, setOpen }) {
                                             <div className="mt-6">
                                                 <button
                                                     onClick={handleCheckout}
-                                                    className="flex items-center justify-center rounded-md border border-transparent bg-gray-900 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-blue-900"
+                                                    className="flex items-center justify-center rounded-md border border-transparent w-full bg-gray-900 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-blue-900"
                                                 >
-                                                    Checkout with PayPal {isOpen && <CheckoutPaypal />}
+                                                    {isOpen && <CheckoutPaypal total={price.toFixed(2)} />}
                                                 </button>
                                             </div>
                                             
@@ -255,7 +256,7 @@ export default function ShoppingCarts({ isOpen, setOpen }) {
                                                     or{" "}
                                                     <button
                                                         type="button"
-                                                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                                                        className="font-medium text-bleu-600 hover:text-blue-900"
                                                         onClick={() =>
                                                             setOpen(false)
                                                         }

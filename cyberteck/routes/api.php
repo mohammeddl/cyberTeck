@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\ProductController;
@@ -32,7 +32,7 @@ Route::get('/products/{id}', [ProductController::class, 'show']);
 Route::put('/products/{id}/', [ProductController::class, 'update']);
 Route::delete('/products/{id}', [ProductController::class, 'destroy']);
 
-
+Route::post('/checkout',[CartController::class, 'store']);
 
 
 

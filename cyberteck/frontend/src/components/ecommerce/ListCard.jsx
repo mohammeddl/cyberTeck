@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { axiosClient } from "../../api/axios";
 import { useNavigate } from "react-router-dom";
+import { ArrowBigLeftDash, ArrowBigRightDash } from "lucide-react";
 
 const productsOlde = [
     {
@@ -28,7 +29,9 @@ export default function ListCard() {
             const response = await axiosClient.get("/api/products");
             console.log(response.data.products);
             setProducts(response.data.products);
-            setTotalPages(Math.ceil(response.data.products.length / itemsPerPage));
+            setTotalPages(
+                Math.ceil(response.data.products.length / itemsPerPage)
+            );
         } catch (error) {
             console.error("Error fetching products:", error);
         }
@@ -120,7 +123,7 @@ export default function ListCard() {
                                 </div>
                                 <div
                                     href={product.href}
-                                    className="relative flex cursor-pointer bg-gray-100 border border-transparent rounded-md py-2 px-8 items-center justify-center text-sm font-medium text-gray-900 hover:bg-gray-200"
+                                    className="relative flex cursor-pointer bg-gray-900 border border-transparent rounded-md py-2 px-8 items-center justify-center text-sm font-medium text-white   hover:bg-gray-700"
                                     onClick={() => {
                                         navigate(`/learn_more/${product.id}`);
                                     }}
@@ -132,25 +135,27 @@ export default function ListCard() {
                     ))}
                 </div>
             </div>
-            <div className="mt-4 flex justify-center pb-8">
-                <button
-                    onClick={prevPage}
-                    disabled={currentPage === 1}
-                    className="mr-2 px-4 py-2 bg-gray-200 rounded"
-                >
-                    Previous
-                </button>
-                <span className="mr-2">
-                    Page {currentPage} of {totalPages}
-                </span>
-                <button
-                    onClick={nextPage}
-                    disabled={currentPage === totalPages}
-                    className="px-4 py-2 bg-gray-200 rounded"
-                >
-                    Next
-                </button>
-            </div>
+            
+                <div className="mt-4 flex justify-center pb-8">
+                    <button
+                        onClick={prevPage}
+                        disabled={currentPage === 1}
+                        className="mr-2 px-4 py-2 bg-gray-200 rounded"
+                    >
+                        <ArrowBigLeftDash />
+                    </button>
+                    <span className="mr-2 pt-2">
+                        Page {currentPage} of {totalPages}
+                    </span>
+                    <button
+                        onClick={nextPage}
+                        disabled={currentPage === totalPages}
+                        className="px-4 py-2 bg-gray-200 rounded"
+                    >
+                        <ArrowBigRightDash />
+                    </button>
+                </div>
+            
         </div>
     );
 }

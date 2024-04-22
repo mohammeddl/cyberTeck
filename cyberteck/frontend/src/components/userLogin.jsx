@@ -44,6 +44,14 @@ export default function UserLogin() {
                 (value)=>{
                   console.log(value)
                     if(value.status === 200){
+                      window.localStorage.setItem(
+                        "ACCESS_TOKEN",
+                        value.data.access_token
+                    );''
+                    window.localStorage.setItem(
+                        "USER",
+                        JSON.stringify(value.data.user)
+                    );
                         navigate(home)
                     }
                 }

@@ -1,11 +1,20 @@
 import logo from '@/images/logo.png'
 import UserLogin from '../components/userLogin'
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 
-export default function Example() {
+export default function Login() {
+
+  const navigate = useNavigate();
+  useEffect(() => {
+      const user = localStorage.getItem("USER");
+      if (user) {
+          navigate("/login");
+      }
+  }, [navigate]);
   return (
     <>
-<h1>welcome aging </h1>
 <UserLogin />
     </>
   )
