@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { X } from "lucide-react";
+import CheckoutPaypal from "./CheckoutPaypal";
 
 export default function ShoppingCarts({ isOpen, setOpen }) {
     const [products, setProducts] = useState([]);
@@ -52,6 +53,11 @@ export default function ShoppingCarts({ isOpen, setOpen }) {
         }, 0);
         setPrice(total);
     };
+
+    const handleCheckout = () => {
+        setOpen(true);
+    };
+    
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>
@@ -236,13 +242,14 @@ export default function ShoppingCarts({ isOpen, setOpen }) {
                                                 checkout.
                                             </p>
                                             <div className="mt-6">
-                                                <a
-                                                    href="#"
+                                                <button
+                                                    onClick={handleCheckout}
                                                     className="flex items-center justify-center rounded-md border border-transparent bg-gray-900 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-blue-900"
                                                 >
-                                                    Checkout
-                                                </a>
+                                                    Checkout with PayPal {isOpen && <CheckoutPaypal />}
+                                                </button>
                                             </div>
+                                            
                                             <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                                                 <p>
                                                     or{" "}
