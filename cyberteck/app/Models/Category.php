@@ -12,7 +12,7 @@ class Category extends Model
         'category_name','id'
     ];
 
-    public function itineraries()
+    public function product()
     {
         return $this->hasOne(Product::class, 'category_id');
     }

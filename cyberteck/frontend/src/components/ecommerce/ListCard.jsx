@@ -9,12 +9,14 @@ const productsOlde = [
         id: 1,
         name: "Zip Tote Basket",
         color: "White and black",
-        href: "#",
         imageSrc:
             "https://img.odcdn.com.br/wp-content/uploads/2020/12/cyberpunk.png",
         imageAlt:
             "Front of zip tote bag with white canvas, black canvas straps and handle, and black zipper pulls.",
         price: "$140",
+        categories: {
+            category_name: "Action",
+        },
     },
 ];
 
@@ -30,7 +32,7 @@ export default function ListCard() {
     const fetchData = async () => {
         try {
             const response = await axiosClient.get("/api/products");
-            
+            console.log(response.data.products);
             setProducts(response.data.products);
             setTotalPages(
                 Math.ceil(response.data.products.length / itemsPerPage)
@@ -77,6 +79,8 @@ export default function ListCard() {
         }
     };
 
+    console.log('test',currentProducts[0].categories.category_name);
+
     return (
         <div className="bg-white ">
             <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -98,13 +102,13 @@ export default function ListCard() {
                                         className="w-full h-full object-center object-cover"
                                     />
                                 </div>
-                                <div className="relative mt-4">
+                                <div className="relative mt-4 flex justify-between">
                                     <h3 className="text-sm font-medium text-gray-900">
                                         {product.name}
                                     </h3>
-                                    {/* <p className="mt-1 text-sm text-gray-500">
-                                        {product.color}
-                                    </p> */}
+                                    <p className=" text-sm text-gray-500">
+                                        {product.categories.category_name}
+                                    </p>
                                 </div>
                                 <div className="absolute top-0 inset-x-0 h-72 rounded-lg p-4 flex items-end justify-end overflow-hidden">
                                     <div
@@ -161,4 +165,3 @@ export default function ListCard() {
         </div>
     );
 }
-

@@ -17,7 +17,7 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'category_name' => $this->faker->randomElement([' Action', 'Fighting', 'Survival', 'ROG','Sports','Racing','Adventure','Horror','Puzzle','Strategy','Simulation']),
+            'category_name' => $this->faker->randomElement([' Action', 'Fighting', 'Survival', 'ROG','Sports','Adventure']),
         ];
  
 

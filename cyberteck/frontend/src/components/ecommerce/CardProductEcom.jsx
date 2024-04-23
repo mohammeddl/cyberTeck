@@ -9,7 +9,7 @@ export default function CardProductEcom({ product  }) {
                     alt="Gaming Headphones"
                     className="object-cover w-full h-full"
                     height="400"
-                    src="/placeholder.svg"
+                    src={"http://localhost:8000/images/" + product.image}
                     style={{
                         aspectRatio: "400/400",
                         objectFit: "cover",
@@ -20,15 +20,15 @@ export default function CardProductEcom({ product  }) {
             <div className="p-6 space-y-4">
                 <h3 className="text-2xl font-bold">{product.name}</h3>
                 <p className="text-gray-500 text-sm">{product.description}</p>
-                <div className="flex items-center justify-between">
-                    <span className="text-3xl font-bold">
+                <div className="flex items-center px-4 justify-between">
+                    <span className="text-2xl font-bold">
                         {product.price + "USD"}
                     </span>
                     <div className="flex gap-2">
-                        <Button size="lg" variant="outline">
+                        <Button variant="outline">
                             Add to Cart
                         </Button>
-                        <Button size="lg">Buy Now</Button>
+                        <Button>Buy Now</Button>
                     </div>
                 </div>
             </div>

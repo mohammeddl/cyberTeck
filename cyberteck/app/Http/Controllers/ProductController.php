@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,7 @@ class ProductController extends Controller
     public function index()
     {
        try{
-            $products = Product::all();
+            $products = Product::with('categories')->get();
             return response()->json(['products' => $products], 200);
         }catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -115,8 +116,17 @@ class ProductController extends Controller
         try{
             $category = $request->category_id;
             $name = $request->name;
-            $products = Product::where('category_id', $category)->where('name', 'like', '%' . $name . '%')->get();
-            return response()->json(['products' => $products], 200);
+            if($category){
+                $products = Product::with('categories')->where('category_id', $category)->get();
+
+                return response()->json(['products' => $products], 200);
+            }
+
+            if($name){
+                $products = Product::with('categories')->where('name', 'like', '%' . $name . '%')->get();
+
+                return response()->json(['products' => $products], 200);
+            }
             
         }catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);

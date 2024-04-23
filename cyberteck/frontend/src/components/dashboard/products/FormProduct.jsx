@@ -32,11 +32,11 @@ export default function FormProduct() {
             const data = new FormData();
             data.append("name", formData.name);
             data.append("description", formData.description);
-            data.append("category_id", formData.category_id); // Make sure formData.category is correct
+            data.append("category_id", formData.category_id); 
             data.append("price", formData.price);
             data.append("stock_quantity", formData.stock);
             data.append("image", formData.image);
-            console.log([...data.entries()]);
+            console.log(data);
     
             const response = await axiosClient.post(
                 "http://localhost:8000/api/products",
@@ -181,7 +181,7 @@ export default function FormProduct() {
                         <div className="mt-2">
                             <select
                                 onChange={handleI}
-                                value={formData.category_id}
+                                
                                 id="category"
                                 name="category"
                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
