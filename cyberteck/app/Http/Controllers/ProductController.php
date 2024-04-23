@@ -54,30 +54,6 @@ class ProductController extends Controller
         return response()->json($product);
     }
 
-    // public function update(ProductRequest $request, $id)
-    // {
-    //     try{
-    //         $product = Product::find($id);
-
-    //         if (!$product) {
-    //             return response()->json(['message' => 'Product not found'], 404);
-    //         }
-
-    //         dd($request->all());
-    //        $product->update([
-    //             'name' => $request->name,
-    //             'price' => $request->price,
-    //             'description' => $request->description,
-    //             'category_id' => $request->category_id,
-    //             'stock_quantity'=>$request->stock_quantity,
-    //             'image' => $request->image
-    //         ]);
-
-    //         return response()->json(['product' => $product], 200);
-    //     }catch (\Exception $e) {
-    //         return response()->json(['error' => $e->getMessage()], 500);
-    //     }
-    // }
 
     public function update(Request $request ,$id)
     {
@@ -105,10 +81,9 @@ class ProductController extends Controller
                 'image' => $imageName
             ]);
 
-            
 
             return response()->json([
-                'itinerary' => $product,
+                'product' => $product,
                 'message' => 'product updated successfully'
             ], 200);
         } catch (\Exception $e) {
@@ -116,8 +91,6 @@ class ProductController extends Controller
         }
     }
 
-
-   
 
     public function destroy($id)
     {
@@ -136,4 +109,18 @@ class ProductController extends Controller
 
     
     }
+
+    public function search(Request $request)
+    {
+        try{
+            $category = $request->category_id;
+            $name = $request->name;
+            $products = Product::where('category_id', $category)->where('name', 'like', '%' . $name . '%')->get();
+            return response()->json(['products' => $products], 200);
+            
+        }catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    
 }

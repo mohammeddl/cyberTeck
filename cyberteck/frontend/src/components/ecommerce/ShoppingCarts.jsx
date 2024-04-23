@@ -2,17 +2,15 @@ import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { X } from "lucide-react";
 import CheckoutPaypal from "./CheckoutPaypal";
+import { useCartContext } from "../context/CartContext";
 
 export default function ShoppingCarts({ isOpen, setOpen }) {
-    const [products, setProducts] = useState([]);
+    // const [products, setProducts] = useState([]);
+    const { products, setProducts } = useCartContext();
     const [price, setPrice] = useState(0);
 
     useEffect(() => {
-        const cart = localStorage.getItem("cart")
-            ? JSON.parse(localStorage.getItem("cart"))
-            : [];
-        setProducts(cart);
-        const total = cart.reduce((acc, item) => {
+        const total = products.reduce((acc, item) => {
             const price =
                 typeof item.price === "string"
                     ? item.price.replace("$", "")
@@ -21,6 +19,8 @@ export default function ShoppingCarts({ isOpen, setOpen }) {
         }, 0);
         setPrice(total);
     }, []);
+
+    
 
     const updateQuantity = (productId, operation) => {
         const updatedCart = products.map((item) => {
@@ -57,8 +57,8 @@ export default function ShoppingCarts({ isOpen, setOpen }) {
     const handleCheckout = () => {
         setOpen(true);
     };
-    
-    console.log(price.toFixed(2))
+
+    console.log(price.toFixed(2));
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>
@@ -247,10 +247,16 @@ export default function ShoppingCarts({ isOpen, setOpen }) {
                                                     onClick={handleCheckout}
                                                     className="flex items-center justify-center rounded-md border border-transparent w-full bg-gray-900 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-blue-900"
                                                 >
-                                                    {isOpen && <CheckoutPaypal total={price.toFixed(2)} />}
+                                                    {isOpen && (
+                                                        <CheckoutPaypal
+                                                            total={price.toFixed(
+                                                                2
+                                                            )}
+                                                        />
+                                                    )}
                                                 </button>
                                             </div>
-                                            
+
                                             <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                                                 <p>
                                                     or{" "}

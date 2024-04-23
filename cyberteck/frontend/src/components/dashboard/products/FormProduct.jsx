@@ -47,7 +47,7 @@ export default function FormProduct() {
                 }
             );
             
-            if (response.status === 201) { // Check for 201 instead of 200 for POST request
+            if (response.status === 201) {
                 console.log(response.data);
                 console.log("product added successfully");
 

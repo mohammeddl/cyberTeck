@@ -12,21 +12,25 @@ const UserApi = {
     },
     register: async (image, name, email, password) => {
         try {
-            console.log("Attempting to register with:", { image, name, email, password }); // Log the registration attempt
+            console.log("Attempting to register with:", { image, name, email, password });
 
             const response = await axiosClient.post("/api/register", {
                 image,
                 name,
                 email,
                 password,
+            }, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
             });
 
-            console.log("API Response after registration:", response); // Log the API response
+            console.log("API Response after registration:", response); 
 
             return response;
         } catch (error) {
-            console.log("Error during registration:", error); // Log any errors during registration
-            return { error: error.message }; // Return the error message
+            console.log("Error during registration:", error); 
+            return { error: error.message }; 
         }
     },
 };

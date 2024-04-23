@@ -15,8 +15,8 @@ class Product extends Model
         'category',
         'price',
         'stock_quantity',
-        'image'
-        
+        'image',
+        'offer',
     ];
 
     public function Cart()

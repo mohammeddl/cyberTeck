@@ -11,42 +11,47 @@ export default function EditProductModel({ isOpen, closeModel, product }) {
         formState: { errors },
     } = useForm();
 
-
     const onSubmit = async (data) => {
-const formData = new FormData();
-formData.append("_method", "PUT");
-formData.append("image", data.image[0]);
-formData.append("name", data.name);
-formData.append("description", data.description);
-formData.append("category_id", data.category_id);
-formData.append("price", data.price);
-formData.append("stock_quantity", data.stock_quantity);
-console.log("Sending FormData:", formData);
+        if (!data.name || !data.description || !data.category_id || !data.price || !data.stock_quantity) {
+            console.error("All fields are required");
+            return;
+        }
+        const formData = new FormData();
+        formData.append("_method", "PUT");
+        formData.append("image", data.image[0]);
+        formData.append("name", data.name);
+        formData.append("description", data.description);
+        formData.append("category_id", data.category_id);
+        formData.append("price", data.price);
+        formData.append("stock_quantity", data.stock_quantity);
+        console.log("Sending FormData:", formData);
 
-console.log("Name field value:", data.name);
+        console.log("Name field value:", data.name);
 
+        try {
+            const response = await axiosClient.post(
+                `/api/products/${product.id}`,
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
+            console.log("Response:", response);
+            if (response.status === 200) {
+                closeModel();
+            }
+        } catch (error) {
+            console.error("Error updating product:", error);
+            console.error(
+                "Error updating product:",
+                error.response ? error.response.data : error
+            );
+        }
+    };
 
-try {
-const response = await axiosClient.put( `/api/products/${product.id}`, formData, {
-headers: {
-"Content-Type": "multipart/form-data",
-},
-});
-if (response.status === 201) {
-    console.log("Product updated successfully");
-closeModel();
-}
-} catch (error) {
-console.error("Error updating product:", error);
-console.error("Error updating product:", error.response ? error.response.data : error);
-}
-};
-
-
-
-    
-    
-        const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState([]);
     const getCategories = async () => {
         try {
             const response = await axiosClient.get("/api/categories");
@@ -132,7 +137,6 @@ console.error("Error updating product:", error.response ? error.response.data : 
                         <div className="mt-2">
                             <input
                                 type="text"
-                                name="name"
                                 id="name"
                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 defaultValue={product.name}
@@ -152,7 +156,6 @@ console.error("Error updating product:", error.response ? error.response.data : 
                         <div className="mt-2">
                             <textarea
                                 id="description"
-                                name="description"
                                 rows={3}
                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 defaultValue={product.description}
@@ -174,7 +177,6 @@ console.error("Error updating product:", error.response ? error.response.data : 
                         <div className="mt-2">
                             <select
                                 id="category"
-                                name="category"
                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                                 {...register("category_id", {
                                     required: true,
@@ -204,7 +206,6 @@ console.error("Error updating product:", error.response ? error.response.data : 
                                 defaultValue={product.price}
                                 {...register("price", { required: true })}
                                 type="number"
-                                name="price"
                                 id="price"
                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
@@ -224,9 +225,8 @@ console.error("Error updating product:", error.response ? error.response.data : 
                         <div className="mt-2">
                             <input
                                 defaultValue={product.stock_quantity}
-                                {...register("stock", { required: true })}
+                                {...register("stock_quantity", { required: true })}
                                 type="number"
-                                name="stock"
                                 id="stock"
                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />

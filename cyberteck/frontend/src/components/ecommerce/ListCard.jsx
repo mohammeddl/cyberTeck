@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { axiosClient } from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 import { ArrowBigLeftDash, ArrowBigRightDash } from "lucide-react";
+import { useCartContext } from "../context/CartContext";
 
 const productsOlde = [
     {
@@ -20,6 +21,8 @@ const productsOlde = [
 export default function ListCard() {
     const navigate = useNavigate();
     const [products, setProducts] = useState(productsOlde);
+    const { addProduct } = useCartContext();
+
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(3);
     const [totalPages, setTotalPages] = useState(1);
@@ -27,7 +30,7 @@ export default function ListCard() {
     const fetchData = async () => {
         try {
             const response = await axiosClient.get("/api/products");
-            console.log(response.data.products);
+            
             setProducts(response.data.products);
             setTotalPages(
                 Math.ceil(response.data.products.length / itemsPerPage)
@@ -40,23 +43,23 @@ export default function ListCard() {
         fetchData();
     }, []);
 
-    const addToCart = (product) => {
-        let cart = localStorage.getItem("cart")
-            ? JSON.parse(localStorage.getItem("cart"))
-            : [];
+    // const addToCart = (product) => {
+    //     let cart = localStorage.getItem("cart")
+    //         ? JSON.parse(localStorage.getItem("cart"))
+    //         : [];
 
-        // Check if the product is already in the cart
-        const existingProduct = cart.find((item) => item.id === product.id);
-        if (existingProduct) {
-            // If the product is already in the cart, increase its quantity
-            existingProduct.quantity += 1;
-        } else {
-            // If the product is not in the cart, add it with a quantity of 1
-            cart.push({ ...product, quantity: 1 });
-        }
+    //     // Check if the product is already in the cart
+    //     const existingProduct = cart.find((item) => item.id === product.id);
+    //     if (existingProduct) {
+    //         // If the product is already in the cart, increase its quantity
+    //         existingProduct.quantity += 1;
+    //     } else {
+    //         // If the product is not in the cart, add it with a quantity of 1
+    //         cart.push({ ...product, quantity: 1 });
+    //     }
 
-        localStorage.setItem("cart", JSON.stringify(cart));
-    };
+    //     localStorage.setItem("cart", JSON.stringify(cart));
+    // };
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -117,7 +120,7 @@ export default function ListCard() {
                                 <div
                                     href={product.href}
                                     className="relative flex cursor-pointer bg-gray-100 border border-transparent rounded-md py-2 px-6 items-center justify-center text-sm font-medium text-gray-900 hover:bg-gray-200"
-                                    onClick={() => addToCart(product)}
+                                    onClick={() => addProduct(product)}
                                 >
                                     Add to bag
                                 </div>
@@ -135,27 +138,27 @@ export default function ListCard() {
                     ))}
                 </div>
             </div>
-            
-                <div className="mt-4 flex justify-center pb-8">
-                    <button
-                        onClick={prevPage}
-                        disabled={currentPage === 1}
-                        className="mr-2 px-4 py-2 bg-gray-200 rounded"
-                    >
-                        <ArrowBigLeftDash />
-                    </button>
-                    <span className="mr-2 pt-2">
-                        Page {currentPage} of {totalPages}
-                    </span>
-                    <button
-                        onClick={nextPage}
-                        disabled={currentPage === totalPages}
-                        className="px-4 py-2 bg-gray-200 rounded"
-                    >
-                        <ArrowBigRightDash />
-                    </button>
-                </div>
-            
+
+            <div className="mt-4 flex justify-center pb-8">
+                <button
+                    onClick={prevPage}
+                    disabled={currentPage === 1}
+                    className="mr-2 px-4 py-2 bg-gray-200 rounded"
+                >
+                    <ArrowBigLeftDash />
+                </button>
+                <span className="mr-2 pt-2">
+                    Page {currentPage} of {totalPages}
+                </span>
+                <button
+                    onClick={nextPage}
+                    disabled={currentPage === totalPages}
+                    className="px-4 py-2 bg-gray-200 rounded"
+                >
+                    <ArrowBigRightDash />
+                </button>
+            </div>
         </div>
     );
 }
+

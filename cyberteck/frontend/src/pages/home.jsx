@@ -32,7 +32,7 @@ export default function Home() {
             <CategoryCard />
             <ShoppingCarts isOpen={openCart} setOpen={setOpenCart} />
             <ListCard />
-            <CardProductEcom />
+            {/* <CardProductEcom /> */}
         </>
     );
 }

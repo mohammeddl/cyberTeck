@@ -1,17 +1,16 @@
-import { useState } from 'react'
-import { RouterProvider } from 'react-router-dom'
-import { router } from './router'
 
-
+import { RouterProvider } from "react-router-dom";
+import { router } from "./router";
+import CartStateContext from "./components/context/CartContext";
 
 function App() {
-
-
-  return (
-    <>
-<RouterProvider router={router}/>
-    </>
-  )
+    return (
+        <>
+            <CartStateContext>
+                <RouterProvider router={router} />
+            </CartStateContext>
+        </>
+    );
 }
 
-export default App
+export default App;

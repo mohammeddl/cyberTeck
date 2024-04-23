@@ -71,6 +71,7 @@ export default function CardProduct() {
     return (
         <div className=" mx-16 flex flex-wrap gap-5 ">
             <EditProductModel
+                closeModel={() => setIsOpen(false)}
                 isOpen={isOpen}
                 closeModel={() => {
                     fetchData();
