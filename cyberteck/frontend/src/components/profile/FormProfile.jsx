@@ -1,3 +1,8 @@
+import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button"
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+
 export default function FormProfile() {
     return (
         <main className="profile-page">
@@ -72,7 +77,58 @@ export default function FormProfile() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="text-center mt-12"></div>
+                            <div className="text-center ">
+                                <Avatar className="w-16 h-16">
+                                    <AvatarImage
+                                        alt="Avatar"
+                                        src="/placeholder-user.jpg"
+                                    />
+                                    <AvatarFallback initials="JD" />
+                                </Avatar>
+                                <div className="grid gap-1.5">
+                                    <h1 className="text-2xl font-bold">
+                                        Jane Doe
+                                    </h1>
+                                    <Button size="sm">
+                                        Change profile picture
+                                    </Button>
+                                </div>
+                            </div>
+                            <div className="grid gap-4 md:gap-8">
+                                <div className="grid gap-2">
+                                    <Label className="text-base" htmlFor="name">
+                                        Name
+                                    </Label>
+                                    <Input defaultValue="Jane Doe" id="name" />
+                                </div>
+                                <div className="grid gap-2">
+                                    <Label
+                                        className="text-base"
+                                        htmlFor="email"
+                                    >
+                                        Email
+                                    </Label>
+                                    <Input
+                                        defaultValue="janedoe@example.com"
+                                        id="email"
+                                        type="email"
+                                    />
+                                </div>
+                                <div className="grid gap-2">
+                                    <Label
+                                        className="text-base"
+                                        htmlFor="username"
+                                    >
+                                        Username
+                                    </Label>
+                                    <Input
+                                        id="username"
+                                        placeholder="Enter your username"
+                                    />
+                                </div>
+
+                                <Button size="sm">Save</Button>
+                            </div>
                         </div>
                     </div>
                 </div>
