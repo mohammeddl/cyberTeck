@@ -36,6 +36,8 @@ Route::get('/search', [ProductController::class, 'search']);
 Route::post('/checkout',[CartController::class, 'store']);
 Route::get('/offer', [ProductController::class,'offer']);
 
+Route::put('/user/{id}', [UserController::class, 'update']);
+
 
 Route::post('/openai/completions', [OpenAIController::class, 'getCompletions']);
 

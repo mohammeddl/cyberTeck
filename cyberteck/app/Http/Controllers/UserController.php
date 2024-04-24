@@ -76,4 +76,21 @@ class UserController extends Controller
 
         return response()->json(['message' => 'Successfully logged out', 'status' => true], 200);
     }
+
+
+    public function update(Request $request,$id){
+
+        try {
+            $userfind = User::find($id);
+            if ($userfind) {
+                $user = User::where('id', $id)->update($request->all());
+                return response()->json(['status' => true, 'message' => 'User updated successfully'], 200);
+            } else {
+                return response()->json(['status' => false, 'message' => 'User not found'], 404);
+            }
+        }
+        catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
 }
