@@ -6,11 +6,11 @@ import NotFound from "../pages/notFound";
 import Layout from "../layouts/layout";
 import LayoutAdmin from "../layouts/layoutAdmin";
 import Blog from "../pages/blog";
-import Community from "../pages/community";
 import HomeComponent from "../pages/indexHome";
 import Dashoard from "../pages/dashboard";
 import DashboardProduct from "../pages/dashboardProduct";
 import ListReviews from "../components/ecommerce/ListReviews";
+import Profile from "../pages/profile";
 
 export const home = "/home";
 
@@ -44,8 +44,8 @@ export const router = createBrowserRouter([
                 element: <Blog />,
             },
             {
-                path: "/community",
-                element: <Community />,
+                path: "/profile",
+                element: <Profile />,
             },
             {
                 path: "/learn_more/:productId",

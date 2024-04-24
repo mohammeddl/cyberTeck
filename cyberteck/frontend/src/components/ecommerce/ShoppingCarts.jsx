@@ -18,9 +18,7 @@ export default function ShoppingCarts({ isOpen, setOpen }) {
             return acc + parseFloat(price);
         }, 0);
         setPrice(total);
-    }, []);
-
-    
+    }, [products]);
 
     const updateQuantity = (productId, operation) => {
         const updatedCart = products.map((item) => {
@@ -57,8 +55,6 @@ export default function ShoppingCarts({ isOpen, setOpen }) {
     const handleCheckout = () => {
         setOpen(true);
     };
-
-    console.log(price.toFixed(2));
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>

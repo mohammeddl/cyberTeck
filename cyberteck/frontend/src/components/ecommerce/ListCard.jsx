@@ -26,13 +26,12 @@ export default function ListCard() {
     const { addProduct } = useCartContext();
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(3);
+    const [itemsPerPage] = useState(8);
     const [totalPages, setTotalPages] = useState(1);
 
     const fetchData = async () => {
         try {
             const response = await axiosClient.get("/api/products");
-            console.log(response.data.products);
             setProducts(response.data.products);
             setTotalPages(
                 Math.ceil(response.data.products.length / itemsPerPage)
@@ -44,24 +43,6 @@ export default function ListCard() {
     useEffect(() => {
         fetchData();
     }, []);
-
-    // const addToCart = (product) => {
-    //     let cart = localStorage.getItem("cart")
-    //         ? JSON.parse(localStorage.getItem("cart"))
-    //         : [];
-
-    //     // Check if the product is already in the cart
-    //     const existingProduct = cart.find((item) => item.id === product.id);
-    //     if (existingProduct) {
-    //         // If the product is already in the cart, increase its quantity
-    //         existingProduct.quantity += 1;
-    //     } else {
-    //         // If the product is not in the cart, add it with a quantity of 1
-    //         cart.push({ ...product, quantity: 1 });
-    //     }
-
-    //     localStorage.setItem("cart", JSON.stringify(cart));
-    // };
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -78,8 +59,6 @@ export default function ListCard() {
             setCurrentPage(currentPage - 1);
         }
     };
-
-    console.log('test',currentProducts[0].categories.category_name);
 
     return (
         <div className="bg-white ">
@@ -107,7 +86,8 @@ export default function ListCard() {
                                         {product.name}
                                     </h3>
                                     <p className=" text-sm text-gray-500">
-                                        {product.categories.category_name}
+                                        {product.categories &&
+                                            product.categories.category_name}
                                     </p>
                                 </div>
                                 <div className="absolute top-0 inset-x-0 h-72 rounded-lg p-4 flex items-end justify-end overflow-hidden">
@@ -122,14 +102,12 @@ export default function ListCard() {
                             </div>
                             <div className="mt-6 flex gap-4">
                                 <div
-                                    href={product.href}
                                     className="relative flex cursor-pointer bg-gray-100 border border-transparent rounded-md py-2 px-6 items-center justify-center text-sm font-medium text-gray-900 hover:bg-gray-200"
                                     onClick={() => addProduct(product)}
                                 >
-                                    Add to bag
+                                    Add to Cart
                                 </div>
                                 <div
-                                    href={product.href}
                                     className="relative flex cursor-pointer bg-gray-900 border border-transparent rounded-md py-2 px-8 items-center justify-center text-sm font-medium text-white   hover:bg-gray-700"
                                     onClick={() => {
                                         navigate(`/learn_more/${product.id}`);
@@ -143,7 +121,7 @@ export default function ListCard() {
                 </div>
             </div>
 
-            <div className="mt-4 flex justify-center pb-8">
+            <div className="flex justify-center pb-8">
                 <button
                     onClick={prevPage}
                     disabled={currentPage === 1}

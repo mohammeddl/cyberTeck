@@ -35,7 +35,8 @@ class ProductController extends Controller
                 'image' => $imageName,
                 'description' => $request->description,
                 'category_id' => $request->category_id,
-                'stock_quantity'=>$request->stock_quantity
+                'stock_quantity'=>$request->stock_quantity,
+                'offer'=>$request->offer
             ]);
             return response()->json($product, 201);
 
@@ -133,4 +134,16 @@ class ProductController extends Controller
         }
     }
     
+
+    public function offer(){
+        try{
+            if(!$products = Product::where('offer', '!=', 0)->first()){
+                return response()->json(['message' => 'No offer available'], 404);
+            }
+            $products = Product::where('offer', '!=', 0)->first();
+            return response()->json(['products' => $products], 200);
+        }catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
 }

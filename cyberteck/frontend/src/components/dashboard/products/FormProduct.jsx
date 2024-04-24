@@ -27,53 +27,52 @@ export default function FormProduct() {
 
     const handleChange = async (e) => {
         e.preventDefault();
-    
+
         try {
             const data = new FormData();
             data.append("name", formData.name);
             data.append("description", formData.description);
-            data.append("category_id", formData.category_id); 
+            data.append("category_id", formData.category_id);
             data.append("price", formData.price);
             data.append("stock_quantity", formData.stock);
             data.append("image", formData.image);
+            data.append("offer", formData.offer);
             console.log(data);
-    
+
             const response = await axiosClient.post(
                 "http://localhost:8000/api/products",
-                data,  {
+                data,
+                {
                     headers: {
                         "Content-Type": "multipart/form-data",
                     },
                 }
             );
-            
+
             if (response.status === 201) {
                 console.log(response.data);
                 console.log("product added successfully");
-
             }
         } catch (error) {
             console.log(error);
         }
     };
-    
-    
 
     const handleI = (e) => {
         const updatedFormData = { ...formData };
         updatedFormData[e.target.name] = e.target.value;
-    
+
         // Special handling for category dropdown
-        if (e.target.name === 'category') {
-            updatedFormData['category_id'] = e.target.value;
+        if (e.target.name === "category") {
+            updatedFormData["category_id"] = e.target.value;
         }
-    
+
         setFormData(updatedFormData);
     };
 
     const handelImage = (e) => {
         const file = e.target.files[0];
-        setFormData((prevData) => ({ ...prevData, image: file, }));
+        setFormData((prevData) => ({ ...prevData, image: file }));
     };
 
     return (
@@ -181,7 +180,6 @@ export default function FormProduct() {
                         <div className="mt-2">
                             <select
                                 onChange={handleI}
-                                
                                 id="category"
                                 name="category"
                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
@@ -216,27 +214,46 @@ export default function FormProduct() {
                         </div>
                     </div>
 
-                    <div className="col-span-full">
-                        <label
-                            htmlFor="stock"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                        >
-                            Stock
-                        </label>
-                        <div className="mt-2">
-                            <input
-                                onChange={handleI}
-                                type="number"
-                                name="stock"
-                                id="stock"
-                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            />
+                    <div className="col-span-full flex gap-6">
+                        <div>
+                            <label
+                                htmlFor="stock"
+                                className="block text-sm font-medium leading-6 text-gray-900"
+                            >
+                                Stock
+                            </label>
+                            <div className="mt-2">
+                                <input
+                                    onChange={handleI}
+                                    type="number"
+                                    name="stock"
+                                    id="stock"
+                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                />
+                            </div>
                         </div>
-                        <div className="py-4  ">
-                            <button className="bg-black py-2 px-4 text-white hover:bg-gray-700">
-                                Add Product
-                            </button>
+                        <div>
+                            <label
+                                htmlFor="stock"
+                                className="block text-sm font-medium leading-6 text-gray-900"
+                            >
+                                Offer
+                            </label>
+                            <div className="mt-2">
+                                <input
+                                    onChange={handleI}
+                                    type="number"
+                                    name="offer"
+                                    id="offer"
+                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                />
+                            </div>
                         </div>
+                    </div>
+                    <div className="py-4  ">
+                        <button className="bg-black py-2 px-4 text-white hover:bg-gray-700">
+                            Add Product
+                        </button>
                     </div>
                 </form>
             </AddProductModel>

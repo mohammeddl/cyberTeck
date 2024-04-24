@@ -1,4 +1,36 @@
+import { useEffect, useState } from "react";
+import { axiosClient } from "../../api/axios";
+import { LoaderIcon } from "lucide-react";
+import { Button } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
+
 export default function Offers() {
+    const [offer, setOffer] = useState([]);
+    const navigate = useNavigate();
+
+    const getOffers = async () => {
+        try {
+            const response = await axiosClient.get("/api/offer");
+            setOffer(response.data.products);
+        } catch (error) {
+            console.error("Error fetching offers:", error);
+        }
+    };
+
+    useEffect(() => {
+        getOffers();
+    }, []);
+
+
+    if (!offer) {
+        return (
+            <div className="flex items-center m-6 justify-center w-40">
+                <LoaderIcon className="h-5 w-5 animate-spin" />
+                Loading...
+            </div>
+        );
+    }
+
     return (
         <div className="bg-white pt-16 lg:py-24">
             <div className="pb-16 bg-gray-900 lg:pb-0 lg:z-10 lg:relative">
@@ -12,7 +44,10 @@ export default function Offers() {
                             <div className="aspect-w-10 aspect-h-6 rounded-xl shadow-xl overflow-hidden sm:aspect-w-16 sm:aspect-h-7 lg:aspect-none lg:h-full">
                                 <img
                                     className="object-cover lg:h-full lg:w-full"
-                                    src="https://media.wired.com/photos/62855b1bb6cfd378a30c474a/master/w_1920,c_limit/Build-Game-Watch-It-Die-Hyper-Scape-Games.jpg"
+                                    src={
+                                        "http://localhost:8000/images/" +
+                                        offer.image
+                                    }
                                     alt=""
                                 />
                             </div>
@@ -20,29 +55,49 @@ export default function Offers() {
                     </div>
                     <div className="mt-12 lg:m-0 lg:col-span-2 lg:pl-8">
                         <div className="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:px-0 lg:py-20 lg:max-w-none">
-                            <blockquote>
+                            <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                                today's offer
+                            </h2>
+                            <div>
                                 <div>
-                                    
                                     <p className="mt-6 text-2xl font-medium text-white">
-                                       <span className="text-3xl "> Welcome to CyberTeck!</span><br></br> Dive into
-                                        the exciting world of gaming with [Your
-                                        Store Name], your ultimate destination
-                                        for all things gaming! Whether you're a
-                                        casual gamer looking for fun and
-                                        entertaining games or a hardcore gamer
-                                        seeking the latest gaming gear and
-                                        accessories, we've got you covered.
+                                        {offer.name}
+                                    </p>
+                                    <p className="mt-6 text-2xl font-medium text-white">
+                                        {offer.description}
+                                    </p>
+                                    <p className="mt-6 text-2xl font-medium text-white">
+                                        {offer.cate}
                                     </p>
                                 </div>
-                                <footer className="mt-6">
-                                    <p className="text-base font-medium text-white">
-                                        Daali Mohammed
-                                    </p>
-                                    <p className="text-base font-medium text-indigo-100">
-                                        CEO at CyberTeck
-                                    </p>
-                                </footer>
-                            </blockquote>
+                                <div className=" space-y-4 items-center  justify-between">
+                                    <span className="text-gray-300 text-2xl line-through mr-2">
+                                        {"$" + offer.price}
+                                    </span>
+                                    <span className="text-red-500 font-bold text-3xl">
+                                        {"$" + offer.offer}
+                                    </span>
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex gap-2">
+                                            <Button
+                                                variant="outline"
+                                                className="bg-white hover:bg-gray-300 text-black"
+                                            >
+                                                Add to Cart
+                                            </Button>
+                                            <Button
+                                                variant="outline"
+                                                className="bg-blue-900 hover:bg-gray-700 text-white"
+                                                onClick={() => {
+                                                    navigate(`/learn_more/${offer.id}`);
+                                                }}
+                                            >
+                                                Learn More
+                                            </Button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

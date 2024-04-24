@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { Tab } from "@headlessui/react";
 import { axiosClient } from "../../api/axios";
 import { LoaderIcon } from "lucide-react";
+import { useCartContext } from "../context/CartContext";
 
 // const products = {
 //   name: 'Application UI Icon Pack',
@@ -52,6 +53,8 @@ function classNames(...classes) {
 export default function ListReviews() {
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
+
+    const { addProduct } = useCartContext();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -130,6 +133,7 @@ export default function ListReviews() {
                                     <button
                                         type="button"
                                         className="w-full bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+                                    onClick={() => addProduct(product)}
                                     >
                                         Add To list {product.price}
                                     </button>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\categoryController;
+use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,8 +33,12 @@ Route::get('/products/{id}', [ProductController::class, 'show']);
 Route::put('/products/{id}/', [ProductController::class, 'update']);
 Route::delete('/products/{id}', [ProductController::class, 'destroy']);
 Route::get('/search', [ProductController::class, 'search']);
-
 Route::post('/checkout',[CartController::class, 'store']);
+Route::get('/offer', [ProductController::class,'offer']);
+
+
+Route::post('/openai/completions', [OpenAIController::class, 'getCompletions']);
+
 
 
 

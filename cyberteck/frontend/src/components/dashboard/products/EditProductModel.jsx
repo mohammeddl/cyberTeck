@@ -7,12 +7,18 @@ export default function EditProductModel({ isOpen, closeModel, product }) {
     const {
         register,
         handleSubmit,
-        setValue,
+        reset,
         formState: { errors },
     } = useForm();
 
     const onSubmit = async (data) => {
-        if (!data.name || !data.description || !data.category_id || !data.price || !data.stock_quantity) {
+        if (
+            !data.name ||
+            !data.description ||
+            !data.category_id ||
+            !data.price ||
+            !data.stock_quantity
+        ) {
             console.error("All fields are required");
             return;
         }
@@ -40,6 +46,7 @@ export default function EditProductModel({ isOpen, closeModel, product }) {
             );
             console.log("Response:", response);
             if (response.status === 200) {
+                reset();
                 closeModel();
             }
         } catch (error) {
@@ -72,7 +79,10 @@ export default function EditProductModel({ isOpen, closeModel, product }) {
         <div className="fixed inset-0 flex items-center justify-center z-50">
             <div
                 className="absolute inset-0 bg-black opacity-50"
-                onClick={closeModel}
+                onClick={() => {
+                    reset();
+                    closeModel();
+                }}
             ></div>
             <div className="bg-white rounded-lg z-50 w-1/2">
                 <form
@@ -225,7 +235,9 @@ export default function EditProductModel({ isOpen, closeModel, product }) {
                         <div className="mt-2">
                             <input
                                 defaultValue={product.stock_quantity}
-                                {...register("stock_quantity", { required: true })}
+                                {...register("stock_quantity", {
+                                    required: true,
+                                })}
                                 type="number"
                                 id="stock"
                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"

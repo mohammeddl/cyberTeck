@@ -2,11 +2,12 @@ import ListCard from "../components/ecommerce/ListCard";
 import ShoppingCarts from "../components/ecommerce/ShoppingCarts";
 import Offers from "../components/ecommerce/Offers";
 import CategoryCard from "../components/ecommerce/CategoryCard";
+import Hero from "../components/index/Hero";
 
-import CardProductEcom from "../components/ecommerce/CardProductEcom";
 import { ShoppingCartIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 export default function Home() {
     const navigate = useNavigate();
     useEffect(() => {
@@ -32,7 +33,8 @@ export default function Home() {
             <CategoryCard />
             <ShoppingCarts isOpen={openCart} setOpen={setOpenCart} />
             <ListCard />
-            {/* <CardProductEcom /> */}
+            <Hero/>
+            {/* <AskMe/> */}
         </>
     );
 }
