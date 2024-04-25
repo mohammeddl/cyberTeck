@@ -2,12 +2,35 @@ import { Button } from "@/components/ui/button";
 import { LoaderIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { axiosClient } from "../../api/axios";
+import { useForm } from "react-hook-form";
 
 export default function HistoryProfile({ user }) {
     console.log("User:", user.id);
 
     const [history, setHistory] = useState([]);
 
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
+    const submitReviews = async (data) => {
+        const formData = new FormData();
+        formData.append("review", data.review);
+        formData.append("product_id", history.product.id);
+        formData.append("user_id", user.id);
+        console.log("Form Data:", formData);
+
+        try {
+            const response = await axiosClient.post(
+                `/api/reviews`,
+                formData
+            );
+            if (response.status === 200) {
+                console.log("Review saved successfully!");
+            }
+        } catch (error) {
+            console.error("Error fetching products:", error);
+        }
+    };
 
 
 
@@ -64,13 +87,21 @@ export default function HistoryProfile({ user }) {
                                 </p>
                             </div>
 
-                            <div onSubmit={handleSubmit(submitReviews)}>
-                                <form  className="grid gap-2.5">
+                            <div >
+                                <form onSubmit={handleSubmit(submitReviews)}  className="grid gap-2.5">
                                     <textarea
                                         className="min-h-[100px]"
                                         id="review-1"
                                         placeholder="Write your review"
+                                        {...register("review", {
+                                            required: true,
+                                        })}
                                     />
+                                    {errors.review && (
+                                        <span className="text-red">
+                                            This field is required
+                                        </span>
+                                    )}
                                     <Button type="submit">Submit</Button>
                                 </form>
                             </div>
