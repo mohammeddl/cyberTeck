@@ -36,8 +36,9 @@ Route::post('/reviews', [ReviewController::class, 'store']);
 Route::get('/reviews/{id}', [ReviewController::class, 'show']);
 
 Route::post('/blog', [BlogController::class, 'store']);
-Route::get('/blog', [BlogController::class, 'index']);
+Route::get('/blogs', [BlogController::class, 'index']);
 Route::put('/blog/{id}', [BlogController::class, 'edit']);
+Route::delete('/blog/{id}', [BlogController::class, 'destroy']);
 
 
 

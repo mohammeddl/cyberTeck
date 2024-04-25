@@ -11,7 +11,7 @@ class BlogController extends Controller
     public function index(){
         try{
             $blogs = Blog::all();
-            return response()->json($blogs, 200);
+            return response()->json(['blogs' => $blogs], 201);
         }catch(Exception $e){
             return response()->json($e, 400);
         }
@@ -64,7 +64,7 @@ class BlogController extends Controller
             $blog->title = $validatedData['title'];
             $blog->content = $validatedData['content'];
             $blog->save();
-            return response()->json($blog, 200);
+            return response()->json($blog, 201);
          }catch(Exception $e){
             return response()->json($e, 400);
        }
@@ -77,7 +77,7 @@ class BlogController extends Controller
                 return response()->json(['message' => 'Blog not found'], 404);
             }
             $blog->delete();
-            return response()->json(['message' => 'Blog deleted successfully'], 200);
+            return response()->json(['message' => 'Blog deleted successfully'], 201);
         }catch(Exception $e){
             return response()->json($e, 400);
         }
