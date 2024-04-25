@@ -9,7 +9,12 @@ use Illuminate\Http\Request;
 class BlogController extends Controller
 {
     public function index(){
-        
+        try{
+            $blogs = Blog::all();
+            return response()->json($blogs, 200);
+        }catch(Exception $e){
+            return response()->json($e, 400);
+        }
     }
 
     public function store(Request $request){

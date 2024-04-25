@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { axiosClient } from "../../../api/axios";
+import { axiosClient } from "../../api/axios";
 import AddBlogModal from "./AddBlogModal";
 
 export default function FormBlog() {
@@ -24,7 +24,7 @@ export default function FormBlog() {
             console.log(data);
 
             const response = await axiosClient.post(
-                "http://localhost:8000/api/products",
+                "http://localhost:8000/api/blog",
                 data,
                 {
                     headers: {
