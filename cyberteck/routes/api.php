@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/register', [UserController::class, 'register']);
+Route::patch('/user/{id}', [UserController::class, 'edit']);
 
 route::get('/categories', [categoryController::class, 'index']);
 
@@ -32,10 +33,13 @@ Route::get('/products/{id}', [ProductController::class, 'show']);
 Route::put('/products/{id}/', [ProductController::class, 'update']);
 Route::delete('/products/{id}', [ProductController::class, 'destroy']);
 Route::get('/search', [ProductController::class, 'search']);
-Route::post('/checkout',[CartController::class, 'store']);
 Route::get('/offer', [ProductController::class,'offer']);
 
-Route::put('/user/{id}', [UserController::class, 'update']);
+Route::post('/checkout',[CartController::class, 'store']);
+Route::get('/history/{id}', [CartController::class, 'show']);
+
+
+
 
 
 

@@ -24,12 +24,11 @@ export default function FormProfile() {
 
     const onSubmitUpdate = async (data) => {
         const formData = new FormData();
-        formData.append("_method", "PUT");
+        formData.append("_method", "PATCH");
         formData.append("name", data.name);
         formData.append("image", data.image[0]);
         formData.append("email", data.email);
 
-       
         console.log("Form Data:", formData);
 
         try {
@@ -38,7 +37,7 @@ export default function FormProfile() {
                 formData
             );
             if (response.status === 200) {
-                console.log("Data saved successfully!"); 
+                console.log("Data saved successfully!");
             }
         } catch (error) {
             console.error("Error fetching products:", error);
@@ -124,21 +123,29 @@ export default function FormProfile() {
                                         <AvatarFallback initials="JD" />
                                     </Avatar>
                                     <div className="grid gap-1.5">
-                                        <h1 className="text-2xl font-bold">
+                                        <label
+                                            htmlFor="image"
+                                            className="text-2xl font-bold"
+                                        >
                                             {user.name}
-                                        </h1>
-                                        <Button size="sm">
+                                        </label>
+                                        <div size="sm">
                                             Change profile picture
                                             <input
-                                                id="dropzone-file"
+                                                id="image"
                                                 type="file"
-                                                
                                                 className="hidden"
+                                                defaultValue={user.image}
                                                 {...register("image", {
                                                     required: true,
                                                 })}
                                             />
-                                        </Button>
+                                            {errors.image && (
+                                                <span className="text-red">
+                                                    This field is required
+                                                </span>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="grid gap-4 md:gap-8">
@@ -150,17 +157,20 @@ export default function FormProfile() {
                                             User Name
                                         </Label>
                                         <Input
-                                            
                                             id="name"
-                                            {...register("name", {
-                                                required: true,
-                                            })}
+                                            defaultValue={user.name}
+                                            placeholder="Enter your name"
                                         />
+                                        {errors.name && (
+                                            <span className="text-red">
+                                                This field is required
+                                            </span>
+                                        )}
                                     </div>
                                     <div className="grid gap-2">
                                         <Label
                                             className="text-base"
-                                            htmlFor="username"
+                                            htmlFor="email"
                                         >
                                             Email
                                         </Label>
@@ -169,9 +179,14 @@ export default function FormProfile() {
                                                 required: true,
                                             })}
                                             id="email"
+                                            defaultValue={user.email}
                                             placeholder="Enter your email"
-                                            
                                         />
+                                        {errors.email && (
+                                            <span className="text-red">
+                                                This field is required
+                                            </span>
+                                        )}
                                     </div>
                                     <Button size="sm">Save</Button>
                                 </div>
@@ -180,7 +195,7 @@ export default function FormProfile() {
                     </div>
                 </div>
             </section>
-            <HistoryProfile />
+            <HistoryProfile user={user} />
         </main>
     );
 }

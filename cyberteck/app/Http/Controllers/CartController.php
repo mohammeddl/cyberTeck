@@ -29,5 +29,22 @@ class CartController extends Controller
             \Log::error('Error creating cart:', ['error' => $e->getMessage(), 'request' => $request->all()]);
             return response()->json(['error' => $e->getMessage()], 500);
         }
-}}
+}
+    public function show($id)
+    {
+        try{
+            $cart = Cart::with('product')->where('user_id', $id)->get();
+            if(!$cart){
+                return response()->json(['message' => 'Cart is empty'], 404);
+            }
+            else {
+                return response()->json(['cart' => $cart,'message'=>'history is sucessfully'], 200);
+            }
+        }catch(\Exception $e){
+            \Log::error('Error getting cart:', ['error' => $e->getMessage()]);
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
 
+}
+
+}

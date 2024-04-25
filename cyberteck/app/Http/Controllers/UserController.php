@@ -45,8 +45,6 @@ class UserController extends Controller
         }
     }
 
-
-
     public function login(Request $request)
     {
         $loginData = $request->validate([
@@ -78,19 +76,23 @@ class UserController extends Controller
     }
 
 
-    public function update(Request $request,$id){
+   public function edit($id, Request $request){
+    try{
+        $user = User::find($id);
+        if(!$user){
+            return response()->json(['message' => 'User not found'], 404);
+        }
 
-        try {
-            $userfind = User::find($id);
-            if ($userfind) {
-                $user = User::where('id', $id)->update($request->all());
-                return response()->json(['status' => true, 'message' => 'User updated successfully'], 200);
-            } else {
-                return response()->json(['status' => false, 'message' => 'User not found'], 404);
-            }
-        }
-        catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return response()->json(['message' => 'User updated successfully', 'status' => true], 200);
     }
+    catch(\Exception $e){
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
+
+   }
 }
