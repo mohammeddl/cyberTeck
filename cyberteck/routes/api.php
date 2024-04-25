@@ -31,6 +31,7 @@ Route::post('/checkout',[CartController::class, 'store']);
 Route::get('/history/{id}', [CartController::class, 'show']);
 
 Route::post('/reviews', [ReviewController::class, 'store']);
+Route::get('/reviews/{id}', [ReviewController::class, 'show']);
 
 
 

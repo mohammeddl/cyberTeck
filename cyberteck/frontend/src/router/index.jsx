@@ -11,6 +11,7 @@ import Dashoard from "../pages/dashboard";
 import DashboardProduct from "../pages/dashboardProduct";
 import ListReviews from "../components/ecommerce/ListReviews";
 import Profile from "../pages/profile";
+import DashboardBlog from "../pages/DashboardBlog";
 
 export const home = "/home";
 
@@ -66,8 +67,8 @@ export const router = createBrowserRouter([
                 element: <DashboardProduct/>,
             },
             {
-                path: "/blogs",
-                element: "",
+                path: "/dashboard/blog",
+                element: <DashboardBlog />,
             },
         ],
     },

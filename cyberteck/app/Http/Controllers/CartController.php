@@ -38,7 +38,7 @@ class CartController extends Controller
                 return response()->json(['message' => 'Cart is empty'], 404);
             }
             else {
-                return response()->json(['cart' => $cart,'message'=>'history is sucessfully'], 200);
+                return response()->json(['cart' => $cart,'message'=>'history is sucessfully'], 201);
             }
         }catch(\Exception $e){
             \Log::error('Error getting cart:', ['error' => $e->getMessage()]);

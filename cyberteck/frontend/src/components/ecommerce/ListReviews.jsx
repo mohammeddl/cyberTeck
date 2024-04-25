@@ -53,8 +53,21 @@ function classNames(...classes) {
 export default function ListReviews() {
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
+    const [reviews, setReviews] = useState([]);
 
     const { addProduct } = useCartContext();
+
+    const getReviews = async () => {
+        try {
+            const response = await axiosClient.get(`/api/reviews/${productId}`);
+            if (response.status === 201) {
+                console.log("Reviews:", response.data.review);
+                setReviews(response.data.review);
+            }
+        } catch (error) {
+            console.error("Error fetching reviews:", error);
+        }
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -68,11 +81,9 @@ export default function ListReviews() {
                 console.error("Error fetching product:", error);
             }
         };
-
         fetchData();
-    }, [productId]); // Fetch data when productId changes
-
-    // ...
+        getReviews();
+    }, [productId]);
 
     if (!product) {
         return (
@@ -88,9 +99,7 @@ export default function ListReviews() {
             {product && (
                 <div className="bg-white">
                     <div className="mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-                        {/* Product */}
                         <div className="lg:grid lg:grid-rows-1 lg:grid-cols-7 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
-                            {/* Product image */}
                             <div className="lg:row-end-1 lg:col-span-4">
                                 <div className="aspect-w-4 aspect-h-3 rounded-lg bg-gray-100 overflow-hidden">
                                     <img
@@ -132,10 +141,10 @@ export default function ListReviews() {
                                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
                                     <button
                                         type="button"
-                                        className="w-full bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
-                                    onClick={() => addProduct(product)}
+                                        className="w-full bg-blue-900 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+                                        onClick={() => addProduct(product)}
                                     >
-                                        Add To list {product.price}
+                                        Add To bag
                                     </button>
                                 </div>
                             </div>
@@ -148,7 +157,7 @@ export default function ListReviews() {
                                                 className={({ selected }) =>
                                                     classNames(
                                                         selected
-                                                            ? "border-indigo-600 text-indigo-600"
+                                                            ? "border-blue-900 text-gray-600"
                                                             : "border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-300",
                                                         "whitespace-nowrap py-6 border-b-2 font-medium text-sm"
                                                     )
@@ -164,83 +173,62 @@ export default function ListReviews() {
                                                 Customer Reviews
                                             </h3>
 
-                                            {reviews.featured.map(
-                                                (review, reviewIdx) => (
-                                                    <div
-                                                        key={review.id}
-                                                        className="flex text-sm text-gray-500 space-x-4"
-                                                    >
-                                                        <div className="flex-none py-10">
-                                                            <img
-                                                                src={
-                                                                    review.avatarSrc
-                                                                }
-                                                                alt=""
-                                                                className="w-10 h-10 bg-gray-100 rounded-full"
-                                                            />
-                                                        </div>
+                                            {reviews &&
+                                                reviews.map(
+                                                    (review, reviewIdx) => (
                                                         <div
-                                                            className={classNames(
-                                                                reviewIdx === 0
-                                                                    ? ""
-                                                                    : "border-t border-gray-200",
-                                                                "py-10"
-                                                            )}
+                                                            key={review.id}
+                                                            className="flex text-sm text-gray-500 space-x-4"
                                                         >
-                                                            <h3 className="font-medium text-gray-900">
-                                                                {review.author}
-                                                            </h3>
-                                                            <p>
-                                                                <time
-                                                                    dateTime={
-                                                                        review.datetime
+                                                            <div className="flex-none py-10">
+                                                                <img
+                                                                    src={
+                                                                        "http://localhost:8000/images/" +
+                                                                        review
+                                                                            .user
+                                                                            .image
                                                                     }
-                                                                >
-                                                                    {
-                                                                        review.date
-                                                                    }
-                                                                </time>
-                                                            </p>
-
-                                                            <div className="flex items-center mt-4">
-                                                                {[
-                                                                    0, 1, 2, 3,
-                                                                    4,
-                                                                ].map(
-                                                                    (
-                                                                        rating
-                                                                    ) => (
-                                                                        <StarIcon
-                                                                            key={
-                                                                                rating
-                                                                            }
-                                                                            className={classNames(
-                                                                                review.rating >
-                                                                                    rating
-                                                                                    ? "text-yellow-400"
-                                                                                    : "text-gray-300",
-                                                                                "h-5 w-5 flex-shrink-0"
-                                                                            )}
-                                                                            aria-hidden="true"
-                                                                        />
-                                                                    )
-                                                                )}
+                                                                    alt=""
+                                                                    className="w-10 h-10 bg-gray-100 rounded-full"
+                                                                />
                                                             </div>
-                                                            <p className="sr-only">
-                                                                {review.rating}{" "}
-                                                                out of 5 stars
-                                                            </p>
-
                                                             <div
-                                                                className="mt-4 prose prose-sm max-w-none text-gray-500"
-                                                                dangerouslySetInnerHTML={{
-                                                                    __html: review.content,
-                                                                }}
-                                                            />
+                                                                className={classNames(
+                                                                    reviewIdx ===
+                                                                        0
+                                                                        ? ""
+                                                                        : "border-t border-gray-200",
+                                                                    "py-10"
+                                                                )}
+                                                            >
+                                                                <h3 className="font-medium text-gray-900">
+                                                                    {
+                                                                        review
+                                                                            .user
+                                                                            .name
+                                                                    }
+                                                                </h3>
+                                                                <p>
+                                                                    <time
+                                                                        dateTime={
+                                                                            review.created_at
+                                                                        }
+                                                                    >
+                                                                        {
+                                                                            review.created_at
+                                                                        }
+                                                                    </time>
+                                                                </p>
+                                                                <div
+                                                                    className="mt-4 prose prose-sm max-w-none text-gray-500"
+                                                                    dangerouslySetInnerHTML={{
+                                                                        __html: review.review,
+                                                                    }}
+                                                                />
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                )
-                                            )}
+                                                    )
+                                                )}
                                         </Tab.Panel>
                                     </Tab.Panels>
                                 </Tab.Group>
