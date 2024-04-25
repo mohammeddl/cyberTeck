@@ -8,11 +8,8 @@ export default function FormBlog() {
 
     const [isOpen, setIsOpen] = useState(false);
     const [formData, setFormData] = useState({
-        name: "",
-        description: "",
-        category_id: "",
-        price: "",
-        stock: "",
+        title: "",
+        content: "",
         image: null,
     });
 
@@ -21,12 +18,9 @@ export default function FormBlog() {
 
         try {
             const data = new FormData();
-            data.append("name", formData.name);
-            data.append("description", formData.description);
-            data.append("price", formData.price);
-            data.append("stock_quantity", formData.stock);
+            data.append("title", formData.title);
+            data.append("content", formData.content);
             data.append("image", formData.image);
-            data.append("offer", formData.offer);
             console.log(data);
 
             const response = await axiosClient.post(
@@ -41,7 +35,7 @@ export default function FormBlog() {
 
             if (response.status === 201) {
                 console.log(response.data);
-                console.log("product added successfully");
+                console.log("blog added successfully");
             }
         } catch (error) {
             console.log(error);
@@ -120,7 +114,7 @@ export default function FormBlog() {
 
                     <div className="col-span-full">
                         <label
-                            htmlFor="name"
+                            htmlFor="title"
                             className="block text-sm font-medium leading-6 text-gray-900"
                         >
                             Name
@@ -128,8 +122,8 @@ export default function FormBlog() {
                         <div className="mt-2">
                             <input
                                 type="text"
-                                name="name"
-                                id="name"
+                                name="title"
+                                id="title"
                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 onChange={handleI}
                             />
@@ -138,16 +132,16 @@ export default function FormBlog() {
 
                     <div className="col-span-full">
                         <label
-                            htmlFor="description"
+                            htmlFor="content"
                             className="block text-sm font-medium leading-6 text-gray-900"
                         >
-                            Description
+                            Content
                         </label>
                         <div className="mt-2">
                             <textarea
                                 onChange={handleI}
-                                id="description"
-                                name="description"
+                                id="content"
+                                name="content"
                                 rows={3}
                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 defaultValue={""}

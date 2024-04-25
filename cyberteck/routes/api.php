@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\categoryController;
@@ -32,6 +33,10 @@ Route::get('/history/{id}', [CartController::class, 'show']);
 
 Route::post('/reviews', [ReviewController::class, 'store']);
 Route::get('/reviews/{id}', [ReviewController::class, 'show']);
+
+Route::post('/blog', [BlogController::class, 'store']);
+Route::get('/blog', [BlogController::class, 'index']);
+Route::put('/blog/{id}', [BlogController::class, 'edit']);
 
 
 
