@@ -82,4 +82,17 @@ class BlogController extends Controller
             return response()->json($e, 400);
         }
     }
+
+    public function search(Request $request){
+        try{
+            if(!$request->title){
+                return response()->json(['message' => 'Please enter a title'], 402);
+            }
+            $title = $request->title;
+            $blogs = Blog::where('title', 'like', '%'.$title.'%')->get();
+            return response()->json(['blogs' => $blogs], 201);
+        }catch(Exception $e){
+            return response()->json($e, 400);
+        }
+    }
 }

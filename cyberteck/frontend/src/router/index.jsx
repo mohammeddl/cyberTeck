@@ -13,7 +13,8 @@ import ListReviews from "../components/ecommerce/ListReviews";
 import Profile from "../pages/profile";
 import DashboardBlog from "../pages/DashboardBlog";
 
-export const home = "/home";
+export const home = "/ecommerce";
+export const blog = "/dashboard/blog";
 
 export const router = createBrowserRouter([
     {
@@ -67,7 +68,7 @@ export const router = createBrowserRouter([
                 element: <DashboardProduct/>,
             },
             {
-                path: "/dashboard/blog",
+                path: blog,
                 element: <DashboardBlog />,
             },
         ],

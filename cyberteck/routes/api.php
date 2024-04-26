@@ -39,6 +39,8 @@ Route::post('/blog', [BlogController::class, 'store']);
 Route::get('/blogs', [BlogController::class, 'index']);
 Route::put('/blog/{id}', [BlogController::class, 'edit']);
 Route::delete('/blog/{id}', [BlogController::class, 'destroy']);
+Route::get('/blog/searche', [BlogController::class, 'search']);
+
 
 
 

@@ -45,27 +45,28 @@ class UserController extends Controller
         }
     }
 
-    public function login(Request $request)
-    {
-        $loginData = $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-        ]);
 
-        // return response()->json($request,200);
+    public function login(Request $request){
+        try{
+            $loginData = $request->validate([
+                'email' => 'required|string|email',
+                'password' => 'required|string',
+            ]);
+            if(!auth()->attempt($loginData)){
+                return response(['message' => 'Invalid credentials', 'status' => false], 401);
+            }
+            
+            $accessToken = auth()->user()->createToken('authToken')->plainTextToken;
 
-        if (!auth()->attempt($loginData)) {
-            return response()->json(['message' => 'Invalid credentials'], 401);
+            return response()->json([
+                'access_token' => $accessToken,
+                'user' => $loginData
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+
         }
 
-        $accessToken = auth()->user()->createToken('authToken')->plainTextToken;
-
-        return response()->json([
-            'access_token' => $accessToken,
-            'user' => auth()->user(),
-            'status' => true,
-            'message' => 'valid login'
-        ], 200);
     }
 
     public function logout(Request $request)

@@ -8,7 +8,7 @@ export default function DashboardBlog() {
             <NavAdmin />
             <main className="flex-1 pb-12 space-y-6 overflow-y-auto bg-gray-100  md:space-y-8">
                 <FormBlog />
-                <CardBlog/>
+                <CardBlog />
             </main>
         </div>
     );

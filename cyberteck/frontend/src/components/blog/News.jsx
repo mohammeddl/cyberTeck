@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
+import { axiosClient } from "../../api/axios";
 
 export default function News() {
     const [news, setNews] = useState([]);
 
     const getblogs = async () => {
         try {
-            const response = await fetch("http://localhost:8000/api/blogs");
-            console.log(response.blogs);
-            setNews(response.blogs);
+            const response = await axiosClient.get("http://localhost:8000/api/blogs");
+            console.log('response', response.data.blogs);
+            console.log('response', response.data.blogs);
+            setNews(response.data.blogs);
         } catch (error) {
             console.log(error);
         }
@@ -20,7 +22,7 @@ export default function News() {
     return (
         <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
             <div className="grid gap-5 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
-                {news.map((blog) => (
+                {news && news.map((blog) => (
                     <div
                         key={blog.id}
                         className="overflow-hidden transition-shadow duration-300 bg-white rounded"
