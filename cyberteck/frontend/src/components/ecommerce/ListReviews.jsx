@@ -74,7 +74,7 @@ export default function ListReviews() {
             try {
                 const response = await axiosClient.get(
                     `/api/products/${productId}`
-                ); // Fetch product by productId
+                ); 
                 console.log(response.data);
                 setProduct(response.data);
             } catch (error) {

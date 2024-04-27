@@ -5,6 +5,10 @@ export default function Nav() {
     const { authenticated, setAuthenticated } = useUserContext();
     const navigate = useNavigate();
 
+    const user = JSON.parse(localStorage.getItem("USER"));
+
+    console.log(user);
+
     const handleLogout = () => {
         localStorage.removeItem("USER");
         localStorage.removeItem("ACCESS_TOKEN");
@@ -18,12 +22,7 @@ export default function Nav() {
                 <div className="w-full px-6 mx-auto leading-10 text-center lg:px-8 max-w-7xl">
                     <div className="box-border flex flex-wrap items-center justify-between -mx-4 text-indigo-900">
                         <div className="relative z-10 flex items-center w-auto px-4 leading-10 lg:flex-grow-0 lg:flex-shrink-0 lg:text-left">
-                            <img
-                                src={Logo}
-                                className="h-14 "
-                            >
-                                
-                            </img>
+                            <img src={Logo} className="h-14 "></img>
                         </div>
 
                         <div className="absolute left-0 z-0 justify-center hidden w-full px-4 -ml-5 space-x-4 font-medium leading-10 md:flex lg:-ml-0 lg:space-x-6 md:flex-grow-0 md:text-left lg:text-center">
@@ -122,13 +121,24 @@ export default function Nav() {
                                 </Link>
                             </div>
                         ) : (
-                            <button
-                                className="inline-flex items-center cursor-pointer justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-blue-950 border border-blue-400 rounded-md shadow-sm focus:ring-offset-gray-900 hover:bg-green-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400"
-                                onClick={handleLogout}
-                            >
-                                {" "}
-                                log out
-                            </button>
+                            <div>
+                                <button
+                                    className="inline-flex items-center cursor-pointer justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-blue-950 border border-blue-400 rounded-md shadow-sm focus:ring-offset-gray-900 hover:bg-green-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400"
+                                    onClick={handleLogout}
+                                >
+                                    {" "}
+                                    log out
+                                </button>
+                                <Link to={('/profile')}>
+                                <img
+                                    className="ml-12 inline-block h-12 w-12 rounded-full ring-2 ring-white"
+                                    src={
+                                        "http://localhost:8000/images/" +
+                                        user.image
+                                    }
+                                />
+                                </Link>
+                            </div>
                         )}
 
                         <div className="flex items-center justify-center h-full mr-5 text-white md:hidden">

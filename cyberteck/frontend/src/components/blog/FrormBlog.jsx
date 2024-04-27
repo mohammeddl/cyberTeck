@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { axiosClient } from "../../api/axios";
 import AddBlogModal from "./AddBlogModal";
+import Swal from "sweetalert2";
 
 export default function FormBlog() {
     useEffect(() => {}, []);
@@ -36,6 +37,14 @@ export default function FormBlog() {
             if (response.status === 201) {
                 console.log(response.data);
                 console.log("blog added successfully");
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Itinerary create successfully",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                setIsOpen(false);
             }
         } catch (error) {
             console.log(error);

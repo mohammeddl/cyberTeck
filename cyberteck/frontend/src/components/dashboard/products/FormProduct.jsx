@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import AddProductModel from "./AddProductModel";
 import { axiosClient } from "../../../api/axios";
+import Swal from "sweetalert2";
 
 export default function FormProduct() {
     const [categories, setCategories] = useState([]);
@@ -27,7 +28,6 @@ export default function FormProduct() {
 
     const handleChange = async (e) => {
         e.preventDefault();
-
         try {
             const data = new FormData();
             data.append("name", formData.name);
@@ -52,6 +52,14 @@ export default function FormProduct() {
             if (response.status === 201) {
                 console.log(response.data);
                 console.log("product added successfully");
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Product create successfully",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                setIsOpen(false);
             }
         } catch (error) {
             console.log(error);
@@ -62,7 +70,6 @@ export default function FormProduct() {
         const updatedFormData = { ...formData };
         updatedFormData[e.target.name] = e.target.value;
 
-        // Special handling for category dropdown
         if (e.target.name === "category") {
             updatedFormData["category_id"] = e.target.value;
         }

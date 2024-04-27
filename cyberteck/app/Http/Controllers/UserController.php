@@ -67,7 +67,7 @@ public function countUser(){
 
             return response()->json([
                 'access_token' => $accessToken,
-                'user' => $loginData
+                'user' => auth()->user(),
             ], 200);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -75,6 +75,7 @@ public function countUser(){
         }
 
     }
+
 
     public function logout(Request $request)
     {
@@ -84,7 +85,7 @@ public function countUser(){
     }
 
 
-   public function edit($id, Request $request){
+    public function edit($id, Request $request){
     try{
         $user = User::find($id);
         if(!$user){
@@ -102,5 +103,5 @@ public function countUser(){
         return response()->json(['error' => $e->getMessage()], 500);
     }
 
-   }
+    }
 }
