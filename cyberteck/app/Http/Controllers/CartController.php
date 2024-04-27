@@ -30,6 +30,12 @@ class CartController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
 }
+
+public function countCart(){
+    $count = Cart::count();
+    return response()->json(['count' => $count], 200);
+}
+
     public function show($id)
     {
         try{

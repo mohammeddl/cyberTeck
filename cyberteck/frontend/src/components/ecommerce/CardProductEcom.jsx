@@ -20,6 +20,7 @@ export default function CardProductEcom({ product  }) {
             <div className="p-6 space-y-4">
                 <h3 className="text-2xl font-bold">{product.name}</h3>
                 <p className="text-gray-500 text-sm">{product.description}</p>
+                <p>{product.categories.category_name}</p>
                 <div className="flex items-center px-4 justify-between">
                     <span className="text-2xl font-bold">
                         {product.price + "USD"}

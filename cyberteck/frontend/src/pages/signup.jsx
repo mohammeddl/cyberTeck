@@ -10,7 +10,7 @@ import { axiosClient } from "../api/axios";
 export default function Signup() {
     const navigate = useNavigate();
 
-    const { handleSubmit,register } = useForm({
+    const { handleSubmit, register } = useForm({
         defaultValues: {
             image: undefined,
             name: "",
@@ -48,8 +48,7 @@ export default function Signup() {
                 );
                 navigate(home);
             }
-        }
-        catch (error) {
+        } catch (error) {
             console.error("Failed to register:", error);
         }
     };

@@ -36,6 +36,7 @@ export default function CategoryCard() {
     const [categories, setCategories] = useState([]);
     const [name, setName] = useState([]);
     const [category_id, setCategoryId] = useState(null);
+    const [loadingSearch, setLoadingSearch] = useState(false);
 
     const getCategories = async () => {
         try {
@@ -47,6 +48,7 @@ export default function CategoryCard() {
     };
 
     const handleSubmit = async () => {
+        setLoadingSearch(true);
         try {
             const response = await axiosClient.get("/api/search", {
                 params: {
@@ -55,15 +57,20 @@ export default function CategoryCard() {
                 },
             });
             setProduct(response.data.products);
+            setLoadingSearch(false);
         } catch (error) {
             console.error("Error fetching products:", error);
+            setProduct([]);
+            setLoadingSearch(false);
         }
     };
 
     useEffect(() => {
         getCategories();
-        handleSubmit();
     }, []);
+    useEffect(() => {
+        handleSubmit();
+    }, [category_id]);
 
     return (
         <>
@@ -82,13 +89,16 @@ export default function CategoryCard() {
             </div>
             <div className="flex justify-center">
                 <div className="grid grid-cols-2 cursor-pointer gap-4 sm:grid-cols-6 m-4 md:mx-24">
-                    {categories.slice(0, 6).map((category) => (
+                    {categories.map((category) => (
                         <div
                             key={category.id}
-                            className="relative rounded-lg border border-gray-300 bg-slate-200 px-4 py-3 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                            className={`relative cursor-pointer rounded-lg border border-gray-300 bg-slate-200 px-4 py-3 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 ${
+                                category_id === category.id
+                                    ? "border-2 border-gray-400"
+                                    : ""
+                            }`}
                             onClick={() => {
                                 setCategoryId(category.id);
-                                handleSubmit();
                             }}
                         >
                             <div className="flex-shrink-0">
@@ -117,6 +127,13 @@ export default function CategoryCard() {
                 </div>
             </div>
 
+            {loadingSearch && (
+                <div className="flex justify-center">
+                    <div className="flex justify-center items-center mt-20">
+                        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900" />
+                    </div>
+                </div>
+            )}
             {products && products.length > 0 && (
                 <div className="flex flex-wrap gap-5 justify-center py-6">
                     {products.map((product) => (

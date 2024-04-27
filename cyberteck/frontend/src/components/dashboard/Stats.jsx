@@ -1,4 +1,46 @@
+import { useEffect, useState } from "react";
+import { axiosClient } from "../../api/axios";
+
 export default function Stats() {
+    const [totalProducts, setTotalProducts] = useState(0);
+    const [totalOrders, setTotalOrders] = useState(0);
+    const [totalUsers, setTotalUsers] = useState(0);
+
+    const fetchProduct = async () => {
+        const response = await axiosClient.get("/api/count");
+
+        if (response.status === 200) {
+            setTotalProducts(response.data.products);
+        } else {
+            console.log("Error");
+        }
+    };
+    const fetchUser = async () => {
+        const response = await axiosClient.get("/api/countUser");
+
+        if (response.status === 200) {
+            setTotalUsers(response.data.count);
+        } else {
+            console.log("Error");
+        }
+    };
+
+    const fetchOrders = async () => {
+        const response = await axiosClient.get("api/countCart");
+
+        if (response.status === 200) {
+            setTotalOrders(response.data.count);
+        } else {
+            console.error("Error");
+        }
+    };
+
+    useEffect(() => {
+        fetchProduct();
+        fetchUser();
+        fetchOrders();
+    }, []);
+
     return (
         <>
             <section className="grid grid-cols-1 gap-8  px-6 xl:grid-cols-3 2xl:grid-cols-3 md:grid-cols-3 m-12">
@@ -44,11 +86,9 @@ export default function Stats() {
 
                         <div className="mx-2">
                             <h3 className="text-2xl font-medium text-gray-800">
-                                40
+                                {totalUsers}
                             </h3>
-                            <p className="mt-1 text-sm text-gray-500">
-                                Users
-                            </p>
+                            <p className="mt-1 text-sm text-gray-500">Users</p>
                         </div>
                     </div>
                 </div>
@@ -86,7 +126,7 @@ export default function Stats() {
 
                         <div className="mx-2">
                             <h3 className="text-2xl font-medium text-gray-800">
-                                33
+                                {totalOrders}
                             </h3>
                             <p className="mt-1 text-sm text-gray-500">
                                 All Orders
@@ -95,46 +135,46 @@ export default function Stats() {
                     </div>
                 </div>
                 <div className="flex items-center px-6 py-8 bg-white rounded-lg shadow-md shadow-gray-200 ">
-                <div className="flex items-center -mx-2">
-                    <svg
-                        className="mx-2"
-                        width="70"
-                        height="70"
-                        viewBox="0 0 70 70"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <circle
-                            cx="35"
-                            cy="35"
-                            r="35"
-                            fill="#4CB8FF"
-                            fill-opacity="0.07"
-                        />
-                        <path
-                            d="M42 26V44H31C30.2044 44 29.4413 43.6839 28.8787 43.1213C28.3161 42.5587 28 41.7956 28 41V29C28 28.2044 28.3161 27.4413 28.8787 26.8787C29.4413 26.3161 30.2044 26 31 26H42Z"
-                            stroke="#4CB8FF"
-                            stroke-width="2"
-                            stroke-linecap="square"
-                        />
-                        <path
-                            d="M28 41C28 40.2044 28.3161 39.4413 28.8787 38.8787C29.4413 38.3161 30.2044 38 31 38H42"
-                            stroke="#4CB8FF"
-                            stroke-width="2"
-                            stroke-linecap="square"
-                        />
-                    </svg>
+                    <div className="flex items-center -mx-2">
+                        <svg
+                            className="mx-2"
+                            width="70"
+                            height="70"
+                            viewBox="0 0 70 70"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <circle
+                                cx="35"
+                                cy="35"
+                                r="35"
+                                fill="#4CB8FF"
+                                fill-opacity="0.07"
+                            />
+                            <path
+                                d="M42 26V44H31C30.2044 44 29.4413 43.6839 28.8787 43.1213C28.3161 42.5587 28 41.7956 28 41V29C28 28.2044 28.3161 27.4413 28.8787 26.8787C29.4413 26.3161 30.2044 26 31 26H42Z"
+                                stroke="#4CB8FF"
+                                stroke-width="2"
+                                stroke-linecap="square"
+                            />
+                            <path
+                                d="M28 41C28 40.2044 28.3161 39.4413 28.8787 38.8787C29.4413 38.3161 30.2044 38 31 38H42"
+                                stroke="#4CB8FF"
+                                stroke-width="2"
+                                stroke-linecap="square"
+                            />
+                        </svg>
 
-                    <div className="mx-2">
-                        <h3 className="text-2xl font-medium text-gray-800">
-                            44
-                        </h3>
-                        <p className="mt-1 text-sm text-gray-500">
-                            Total Posts
-                        </p>
+                        <div className="mx-2">
+                            <h3 className="text-2xl font-medium text-gray-800">
+                                {totalProducts}
+                            </h3>
+                            <p className="mt-1 text-sm text-gray-500">
+                                Total Products
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
             </section>
         </>
     );

@@ -18,6 +18,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/register', [UserController::class, 'register']);
 Route::patch('/user/{id}', [UserController::class, 'edit']);
+Route::get('/countUser', [UserController::class, 'countUser']);
 
 route::get('/categories', [categoryController::class, 'index']);
 
@@ -28,9 +29,11 @@ Route::put('/products/{id}/', [ProductController::class, 'update']);
 Route::delete('/products/{id}', [ProductController::class, 'destroy']);
 Route::get('/search', [ProductController::class, 'search']);
 Route::get('/offer', [ProductController::class,'offer']);
+Route::get('/count', [ProductController::class, 'count']);
 
 Route::post('/checkout',[CartController::class, 'store']);
 Route::get('/history/{id}', [CartController::class, 'show']);
+Route::get('/countCart', [CartController::class, 'countCart']);
 
 Route::post('/reviews', [ReviewController::class, 'store']);
 Route::get('/reviews/{id}', [ReviewController::class, 'show']);

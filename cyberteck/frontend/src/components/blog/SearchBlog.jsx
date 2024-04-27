@@ -4,7 +4,7 @@ import { axiosClient } from "../../api/axios";
 export default function SearchBlog() {
     const [title, setTitle] = useState("");
     const [news, setNews] = useState([]);
-    const [error, setError] = useState('');
+    const [error, setError] = useState("");
 
     const getblogs = async () => {
         try {
@@ -13,10 +13,13 @@ export default function SearchBlog() {
             });
             console.log("response", response.data.blogs);
             setNews(response.data.blogs);
-            if(response.data.blogs.length === 0) setError("No blogs found."); // Set error message
-            
+            if (response.data.blogs.length === 0) {
+                setError("No blogs found.");
+                setNews([]);
+            } // Set error message
         } catch (error) {
             console.log(error);
+            setNews([]);
             // setError("An error occurred while fetching blogs."); // Set error message
         }
     };
@@ -51,7 +54,7 @@ export default function SearchBlog() {
             </div>
             <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
                 {error && <h1 className="text-red-500">{error}</h1>}
-                {news &&
+                {news.length > 0 &&
                     news.map((blog) => (
                         <div
                             key={blog.id}

@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+
+public function countUser(){
+    $count = User::count();
+    return response()->json(['count' => $count], 200);
+    
+}
+
     public function register(UserRequest $request){
         try {
 

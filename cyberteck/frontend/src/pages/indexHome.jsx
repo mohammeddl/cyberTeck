@@ -1,4 +1,5 @@
 import Offers from "../components/ecommerce/Offers";
+import Faq from "../components/faq";
 import Hero from "../components/index/Hero";
 
 const HomeComponent = () => {
@@ -9,150 +10,256 @@ const HomeComponent = () => {
                 <div className="w-full max-w-3xl px-16 mx-auto leading-6 text-left sm:px-12 md:px-8 xl:px-12">
                     <div className="relative w-full px-4 leading-6 text-center xl:flex-grow-0 xl:flex-shrink-0 lg:flex-grow-0 lg:flex-shrink-0">
                         <div className="box-border text-sm font-semibold text-[#BA9672] uppercase">
-                        Featured Products Explore our handpicked selection
+                            Featured Products Explore our handpicked selection
                         </div>
                         <h2 className="box-border mx-0 mt-6 mb-0 font-sans text-4xl font-bold leading-tight text-[#100D3F] sm:text-5xl md:text-6xl">
-                           
                             Of featured gaming products:
                         </h2>
                     </div>
                 </div>
             </section>
-            <Hero/>
-            <section className="bg-[#100D3F]">
-                <div className="relative px-16 pt-20 pb-32 mx-auto max-w-7xl xl:px-16">
-                    <svg
-                        className="relative z-10 w-16 mb-12 text-[#BA9672] transform opacity-100 fill-current sm:w-20 -rotate-0 rotate rotate-3"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 50 46"
-                    >
-                        <defs></defs>
-                        <g fillRule="nonzero">
-                            <path d="M46.651 2.666c1.892-.812 1.06-1.401-1.337-1.81A4.827 4.827 0 0044.323 0a3.914 3.914 0 00-.614.64C34.376-.395 11.639.36 8.676 1.976 6.99 1.437 1.364 9.542.344 13.552c-.436.1-.436.632-.12 1.487a.84.84 0 00.1.28v-.05a2.8 2.8 0 00.247.668h.06c2.814 5.749 14.356 19.796 15 20.673l-.149-.158c2.418 2.587 3.963 5.547 6.291 8.17 2.626 2.213 3.478 1.437 3.399-.065 2.784-1.171 3.289-3.73 4.775-5.655 5.608-7.904 14.742-14.651 19.498-22.763a2.347 2.347 0 00-.09-.575c1.725-2.429-.296-9.018-2.704-12.898zM38.25 24.093c-4.38 5.863-12.355 11.432-13.693 18.15-.33-.903-.903-1.75-1.684-2.493C15.987 31.616 10.4 22.828 3.088 14.931c3.101-1.997 3.636-6.021 5.469-8.615l-.09.187.199-.41-.06.13.08-.151c.31-1.051.463-2.123.455-3.198.876.312 1.796.553 2.745.719 10.333-.633 20.805-.144 31.129-.417.198 1.71 1.387 3.514 1.982 5.094 0-.057 0-.122-.08-.18 1.11 2.243.803 4.937 2.616 6.92-2.953 1.337-8.342 8.048-9.283 9.083zM7.5 14.505v-.01.01z"></path>
-                            <path d="M9.567 12.925c-.022.243.175.468.486.556 0 .065.05.13.08.094l.139-.05h.069c-1.015.233-1.858.754-2.341 1.445.908.243 1.84.436 2.787.578.208.5.484.985.824 1.445v.094-.036c.387.607.763 1.214 1.16 1.814v-.072c.516.816.992 1.64 1.548 2.457.555.817 1.13 1.9 1.736 2.782a.241.241 0 01-.05-.08c1.587 2.169 2.599 4.59 4.444 6.635 3.482 2.002-.536-3.874-1.2-4.777-1.101-1.662-2.232-3.324-3.294-5-.892-1.446-1.845-2.892-2.787-4.337-.149-.354-.298-.65-.446-.925 2.975-.152 5.951-.455 8.927-.513 3.849-.145 7.737 0 11.606 0-.466 1.604-.526 4.025-.992 4.85-.387 3.403-3.968 7.096-2.46 10.37.605-.477 1.029-1.06 1.23-1.692 1.21-4.43 3.918-8.99 3.75-13.535 2.579.03 5.159-.045 7.727-.224 3.65-.853 3.134-2.32-.546-2.349h.218c-2.55.05-5.098.058-7.648.05a27.367 27.367 0 00-3.095-5.181.511.511 0 01-.089-.13c-1.408 1.257.308 3.714 1.597 5.304-4.85 0-9.7 0-14.551.217h.218c-2.113.333-5.168.116-7.53.564.165-.11.255-.265.249-.427a.376.376 0 000-.151c2.48-2.212 7.241-8.166 3.115-6.367l-4.88 6.59zm3.68 3.526a.19.19 0 010 .065.285.285 0 010-.08v.015zM11.5 17.505v-.01z"></path>
-                            <path d="M14.499 21.55v-.1a.54.54 0 010 .1zM41.874 10c.462-1.423-.366-2.884-2.197-3.876A.87.87 0 0139.522 6c-1.373.757.287 2.644 1.266 3.49.303.209.671.382 1.086.51zM40.5 9.505v-.01z"></path>
-                        </g>
-                    </svg>
+            <Hero />
 
-                    <div className="relative z-20">
-                        <h3 className="text-5xl font-bold leading-tight text-left text-white md:text-6xl lg:text-7xl xl:text-7xl xl:leading-tight">
-                            Tout grande Idée commence par une histoire encore
-                            plus grande...
-                        </h3>
-                        <div className="flex flex-col mt-14 sm:flex-row sm:items-center">
-                            <p className="text-xl font-normal text-left text-[#BA9672]">
-                                Utilisez notre plateforme pour raconter votre
-                                histoire
-                            </p>
-                            <div className="flex mt-5 space-x-1 sm:mt-1 sm:ml-3">
-                                <div className="w-10 h-2 bg-[#BA9672] rounded-full opacity-100"></div>
-                                <div className="w-8 h-2 bg-[#BA9672] rounded-full opacity-75"></div>
-                                <div className="w-4 h-2 bg-[#BA9672] rounded-full opacity-50"></div>
-                                <div className="w-3 h-2 bg-[#BA9672] rounded-full opacity-25"></div>
-                                <div className="w-2 h-2 bg-[#BA9672] rounded-full opacity-10"></div>
-                                <div className="w-2 h-2 bg-[#BA9672] rounded-full opacity-5"></div>
-                            </div>
-                        </div>
+            <section className="box-border relative w-full font-sans leading-6 text-gray-700 bg-white border-0 border-gray-200 border-solid">
+                <div className="box-border flex flex-col items-center px-8  mx-auto leading-6 border-solid max-w-7xl xl:px-16 md:items-stretch md:justify-center ">
+                    <div className="relative pb-10">
+                        <h2 className="w-full m-0 font-sans text-4xl font-black leading-loose tracking-wide text-center text-gray-700 border-0 border-gray-200 sm:text-5xl">
+                            Exciting Features for Gamers
+                        </h2>
+                        <p className="w-full max-w-xl mx-0 mx-auto mt-4 mb-0 font-sans text-sm font-medium leading-relaxed text-center text-gray-400 border-0 border-gray-200 lg:text-lg md:text-base">
+                            Explore our range of powerful features tailored for
+                            gamers. Trusted by gaming enthusiasts worldwide, we
+                            offer cutting-edge tools to enhance your gaming
+                            experience. Let's level up together!
+                        </p>
                     </div>
-                    <div className="grid grid-cols-1 mt-24 gap-14 lg:grid-cols-3">
-                        <div className="flex text-white">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="flex-shrink-0 w-20 h-20 mr-8 text-[#BA9672] stroke-current"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                fill="none"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            >
-                                <path
-                                    stroke="none"
-                                    d="M0 0h24v24H0z"
-                                    fill="none"
-                                ></path>
-                                <path d="M19 11v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
-                                <path d="M13 13l9 3l-4 2l-2 4l-3 -9"></path>
-                                <line x1="3" y1="3" x2="3" y2="3.01"></line>
-                                <line x1="7" y1="3" x2="7" y2="3.01"></line>
-                                <line x1="11" y1="3" x2="11" y2="3.01"></line>
-                                <line x1="15" y1="3" x2="15" y2="3.01"></line>
-                                <line x1="3" y1="7" x2="3" y2="7.01"></line>
-                                <line x1="3" y1="11" x2="3" y2="11.01"></line>
-                                <line x1="3" y1="15" x2="3" y2="15.01"></line>
-                            </svg>
-                            <div className="relative space-y-2">
-                                <h4 className="text-xl font-bold leading-relaxed">
-                                    140+ hand-crafted designs &amp; templates
-                                </h4>
-                                <p className="text-lg text-gray-300">
-                                    Hundreds of designs to build amazing landing
-                                    pages for your application.
-                                </p>
+
+                    <div className="z-10 grid gap-5 md:grid-cols-6 lg:grid-cols-9">
+                        {/* Feature 1 */}
+                        <div className="col-span-3 font-sans text-gray-700 bg-gray-50 rounded-3xl">
+                            <div className="box-border flex flex-col items-start h-full px-2 py-8 mx-4 leading-6 text-center border-solid sm:flex-row sm:items-start sm:text-left">
+                                <div className="flex-shrink-0 p-3 font-sans text-gray-700 border border-gray-200 rounded-full">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="leading-6 text-center text-gray-700 align-middle stroke-current w-7 h-7"
+                                        viewBox="0 0 24 24"
+                                        strokeWidth="1.5"
+                                        stroke="#2c3e50"
+                                        fill="none"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    >
+                                        <path
+                                            d="M0 0h24v24H0z"
+                                            stroke="none"
+                                        ></path>
+                                        <path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3M12 12l8-4.5M12 12v9M12 12L4 7.5M16 5.25l-8 4.5"></path>
+                                    </svg>
+                                </div>
+                                <div className="mt-4 font-sans text-left text-gray-700 border-0 border-gray-200 sm:mt-2 sm:ml-4">
+                                    <h6 className="box-border text-2xl font-bold leading-none tracking-wide text-left border-solid">
+                                        Exclusive Titles
+                                    </h6>
+                                    <p className="box-border mx-0 mt-1 mb-0 font-medium leading-loose text-gray-400 border-solid sm:mt-4">
+                                        Discover our vast library of exclusive
+                                        gaming titles to fuel your passion for
+                                        gaming.
+                                    </p>
+                                </div>
                             </div>
                         </div>
-
-                        <div className="flex text-white">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="flex-shrink-0 w-20 h-20 mr-8 text-[#BA9672] stroke-current"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                fill="none"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            >
-                                <path
-                                    stroke="none"
-                                    d="M0 0h24v24H0z"
-                                    fill="none"
-                                ></path>
-                                <path d="M4 13.5v-7.5a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-6m-8 -10h16m-10 -6v11.5m-8 3.5h7m-3 -3l3 3l-3 3"></path>
-                            </svg>
-                            <div className="relative space-y-2">
-                                <h4 className="text-xl font-bold leading-relaxed">
-                                    Easily import &amp; export into any existing
-                                    app
-                                </h4>
-                                <p className="text-lg text-gray-300">
-                                    All templates can be easily be exported and
-                                    imported into any of your applications.
-                                </p>
+                        {/* Feature 2 */}
+                        <div className="col-span-3 font-sans text-gray-700 bg-gray-50 rounded-3xl">
+                            <div className="box-border flex flex-col items-start h-full px-2 py-8 mx-4 leading-6 text-center border-solid sm:flex-row sm:items-start sm:text-left">
+                                <div className="flex-shrink-0 p-3 font-sans text-gray-700 border border-gray-200 rounded-full">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="leading-6 text-center text-gray-700 align-middle stroke-current w-7 h-7"
+                                        width="44"
+                                        height="44"
+                                        viewBox="0 0 24 24"
+                                        strokeWidth="1.5"
+                                        stroke="#2c3e50"
+                                        fill="none"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    >
+                                        <path
+                                            d="M0 0h24v24H0z"
+                                            stroke="none"
+                                        ></path>
+                                        <path d="M7 12l5 5L22 7M2 12l5 5m5-5l5-5"></path>
+                                    </svg>
+                                </div>
+                                <div className="mt-4 font-sans text-left text-gray-700 border-0 border-gray-200 sm:mt-2 sm:ml-4">
+                                    <h6 className="box-border text-2xl font-bold leading-none tracking-wide text-left border-solid">
+                                        Virtual Reality
+                                    </h6>
+                                    <p className="box-border mx-0 mt-1 mb-0 font-medium leading-loose text-gray-400 border-solid sm:mt-4">
+                                        Immerse yourself in the world of virtual
+                                        reality with our cutting-edge VR gaming
+                                        experiences.
+                                    </p>
+                                </div>
                             </div>
                         </div>
-
-                        <div className="flex text-white">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="flex-shrink-0 w-20 h-20 mr-8 text-[#BA9672] stroke-current"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                fill="none"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            >
-                                <path
-                                    stroke="none"
-                                    d="M0 0h24v24H0z"
-                                    fill="none"
-                                ></path>
-                                <path d="M19 3h-4a2 2 0 0 0 -2 2v12a4 4 0 0 0 8 0v-12a2 2 0 0 0 -2 -2"></path>
-                                <path d="M13 7.35l-2 -2a2 2 0 0 0 -2.828 0l-2.828 2.828a2 2 0 0 0 0 2.828l9 9"></path>
-                                <path d="M7.3 13h-2.3a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h12"></path>
-                                <line x1="17" y1="17" x2="17" y2="17.01"></line>
-                            </svg>
-                            <div className="relative space-y-2">
-                                <h4 className="text-xl font-bold leading-relaxed">
-                                    Customize and modify to make it your own
-                                </h4>
-                                <p className="text-lg text-gray-300">
-                                    Change the text, color, font, and many other
-                                    aspects to make it your own.
-                                </p>
+                        {/* Feature 3 */}
+                        <div className="col-span-3 font-sans text-gray-700 bg-gray-50 rounded-3xl">
+                            <div className="box-border flex flex-col items-start h-full px-2 py-8 mx-4 leading-6 text-center border-solid sm:flex-row sm:items-start sm:text-left">
+                                <div className="flex-shrink-0 p-3 font-sans text-gray-700 border border-gray-200 rounded-full">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="leading-6 text-center text-gray-700 align-middle stroke-current w-7 h-7"
+                                        width="44"
+                                        height="44"
+                                        viewBox="0 0 24 24"
+                                        strokeWidth="1.5"
+                                        stroke="#2c3e50"
+                                        fill="none"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    >
+                                        <path
+                                            d="M0 0h24v24H0z"
+                                            stroke="none"
+                                        ></path>
+                                        <path d="M9 4.55a8 8 0 016 14.9M15 15v5h5M5.63 7.16v.01M4.06 11v.01M4.63 15.1v.01M7.16 18.37v.01M11 19.94v.01"></path>
+                                    </svg>
+                                </div>
+                                <div className="mt-4 font-sans text-left text-gray-700 border-0 border-gray-200 sm:mt-2 sm:ml-4">
+                                    <h6 className="box-border text-2xl font-bold leading-none tracking-wide text-left border-solid">
+                                        Community
+                                    </h6>
+                                    <p className="box-border mx-0 mt-1 mb-0 font-medium leading-loose text-gray-400 border-solid sm:mt-4">
+                                        Join our vibrant gaming community and
+                                        connect with fellow gamers worldwide.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        {/* Feature 4 */}
+                        <div className="col-span-3 font-sans text-gray-700 bg-gray-50 rounded-3xl">
+                            <div className="box-border flex flex-col items-start h-full px-2 py-8 mx-4 leading-6 text-center border-solid sm:flex-row sm:items-start sm:text-left">
+                                <div className="flex-shrink-0 p-3 font-sans text-gray-700 border border-gray-200 rounded-full">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="leading-6 text-center text-gray-700 align-middle stroke-current w-7 h-7"
+                                        width="44"
+                                        height="44"
+                                        viewBox="0 0 24 24"
+                                        strokeWidth="1.5"
+                                        stroke="#2c3e50"
+                                        fill="none"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    >
+                                        <path
+                                            d="M0 0h24v24H0z"
+                                            stroke="none"
+                                        ></path>
+                                        <path d="M3 12h3M12 3v3M7.8 7.8L5.6 5.6M16.2 7.8l2.2-2.2M7.8 16.2l-2.2 2.2M12 12l9 3-4 2-2 4-3-9"></path>
+                                    </svg>
+                                </div>
+                                <div className="mt-4 font-sans text-left text-gray-700 border-0 border-gray-200 sm:mt-2 sm:ml-4">
+                                    <h6 className="box-border text-2xl font-bold leading-none tracking-wide text-left border-solid">
+                                        Customization
+                                    </h6>
+                                    <p className="box-border mx-0 mt-1 mb-0 font-medium leading-loose text-gray-400 border-solid sm:mt-4">
+                                        Personalize your gaming experience with
+                                        customizable features tailored to your
+                                        preferences.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        {/* Feature 5 */}
+                        <div className="col-span-3 font-sans text-gray-700 bg-gray-50 rounded-3xl">
+                            <div className="box-border flex flex-col items-start h-full px-2 py-8 mx-4 leading-6 text-center border-solid sm:flex-row sm:items-start sm:text-left">
+                                <div className="flex-shrink-0 p-3 font-sans text-gray-700 border border-gray-200 rounded-full">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="leading-6 text-center text-gray-700 align-middle stroke-current w-7 h-7"
+                                        width="44"
+                                        height="44"
+                                        viewBox="0 0 24 24"
+                                        strokeWidth="1.5"
+                                        stroke="#2c3e50"
+                                        fill="none"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    >
+                                        <path
+                                            d="M0 0h24v24H0z"
+                                            stroke="none"
+                                        ></path>
+                                        <path d="M13 3v7h6l-8 11v-7H5l8-11"></path>
+                                    </svg>
+                                </div>
+                                <div className="mt-4 font-sans text-left text-gray-700 border-0 border-gray-200 sm:mt-2 sm:ml-4">
+                                    <h6 className="box-border text-2xl font-bold leading-none tracking-wide text-left border-solid">
+                                        Fast Delivery
+                                    </h6>
+                                    <p className="box-border mx-0 mt-1 mb-0 font-medium leading-loose text-gray-400 border-solid sm:mt-4">
+                                        Enjoy fast and reliable delivery
+                                        services to get your gaming gear in no
+                                        time.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        {/* Feature 6 */}
+                        <div className="col-span-3 font-sans text-gray-700 border-0 bg-gray-50 rounded-3xl">
+                            <div className="box-border flex flex-col items-start h-full px-2 py-8 mx-4 leading-6 text-center border-solid sm:flex-row sm:items-start sm:text-left">
+                                <div className="flex-shrink-0 p-3 font-sans text-gray-700 border border-gray-200 rounded-full">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="leading-6 text-center text-gray-700 align-middle stroke-current w-7 h-7"
+                                        width="44"
+                                        height="44"
+                                        viewBox="0 0 24 24"
+                                        strokeWidth="1.5"
+                                        stroke="#2c3e50"
+                                        fill="none"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    >
+                                        <path
+                                            d="M0 0h24v24H0z"
+                                            stroke="none"
+                                        ></path>
+                                        <rect
+                                            x="3"
+                                            y="4"
+                                            width="18"
+                                            height="8"
+                                            rx="3"
+                                        ></rect>
+                                        <rect
+                                            x="3"
+                                            y="12"
+                                            width="18"
+                                            height="8"
+                                            rx="3"
+                                        ></rect>
+                                        <path d="M7 8v.01M7 16v.01"></path>
+                                    </svg>
+                                </div>
+                                <div className="mt-4 font-sans text-left text-gray-700 border-0 border-gray-200 sm:mt-2 sm:ml-4">
+                                    <h6 className="box-border text-2xl font-bold leading-none tracking-wide text-left border-solid">
+                                        Customer Support
+                                    </h6>
+                                    <p className="box-border mx-0 mt-1 mb-0 font-medium leading-loose text-gray-400 border-solid sm:mt-4">
+                                        Benefit from our dedicated customer
+                                        support team, available 24/7 to assist
+                                        you with any queries.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+            <Faq/>
         </>
     );
 };

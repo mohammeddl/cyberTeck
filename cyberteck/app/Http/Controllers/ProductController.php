@@ -133,7 +133,6 @@ class ProductController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-    
 
     public function offer(){
         try{
@@ -141,6 +140,15 @@ class ProductController extends Controller
                 return response()->json(['message' => 'No offer available'], 404);
             }
             $products = Product::where('offer', '!=', 0)->first();
+            return response()->json(['products' => $products], 200);
+        }catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function count(){
+        try{
+            $products = Product::count();
             return response()->json(['products' => $products], 200);
         }catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);

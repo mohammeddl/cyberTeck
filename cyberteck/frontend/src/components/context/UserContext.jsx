@@ -22,12 +22,19 @@ export default function UserContext({ children }) {
     );
 
     const login = async (email, password) => {
-        await UserApi.getCsrfToken();
-        _setAuthenticated(true);
         const response = await UserApi.login(email, password);
-        setUser(response.data.user);
-        window.localStorage.setItem("ACCESS_TOKEN", response.data.access_token);
-        window.localStorage.setItem("USER", JSON.stringify(response.data.user));
+        if (response.data.user) {
+            setUser(response.data.user);
+            window.localStorage.setItem(
+                "ACCESS_TOKEN",
+                response.data.access_token
+            );
+            window.localStorage.setItem(
+                "USER",
+                JSON.stringify(response.data.user)
+            );
+            _setAuthenticated(true);
+        }
         return response;
     };
 
@@ -63,7 +70,6 @@ export default function UserContext({ children }) {
                     JSON.stringify(response.data.user)
                 );
             }
-            
 
             return response;
         } catch (error) {
