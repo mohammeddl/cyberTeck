@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Logo from "../assets/logo.png";
 
 import { useNavigate } from "react-router-dom";
 
@@ -55,109 +56,131 @@ export default function Signup() {
 
     return (
         <>
-            <form
-                className="space-y-6 m-12"
-                onSubmit={handleSubmit(onSubmitRegister)}
-            >
-                <div>
-                    <label
-                        htmlFor="file"
-                        className="block text-sm text-gray-500 dark:text-gray-300"
-                    >
-                        File
-                    </label>
-
-                    <label
-                        htmlFor="dropzone-file"
-                        className="flex flex-col items-center w-full max-w-lg p-5 mx-auto mt-2 text-center bg-white border-2 border-gray-300 border-dashed cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="w-8 h-8 text-gray-500 dark:text-gray-400"
+            <div className="container flex items-center justify-center md:py-16 px-6 mx-auto">
+                <form
+                    className="w-full max-w-md"
+                    onSubmit={handleSubmit(onSubmitRegister)}
+                >
+                     <div className="flex justify-center mx-auto">
+                        <img className="w-auto h-16 sm:h-16" src={Logo} alt="" />
+                    </div>
+                    <div>
+                        <label
+                            htmlFor="dropzone-file"
+                            className="flex items-center px-3 py-3 mx-auto mt-6 text-center bg-white border-2 border-dashed rounded-lg cursor-pointer dark:border-gray-600 dark:bg-gray-900"
                         >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="w-6 h-6 text-gray-300 dark:text-gray-500"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                                />
+                            </svg>
+
+                            <h2 className="mx-3 text-gray-400">
+                                Profile Photo
+                            </h2>
+                            <input
+                                id="dropzone-file"
+                                type="file"
+                                className="hidden"
+                                {...register("image", { required: true })}
                             />
-                        </svg>
-
-                        <h2 className="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">
-                            Payment File
-                        </h2>
-
-                        <p className="mt-2 text-xs tracking-wide text-gray-500 dark:text-gray-400">
-                            Upload or drag & drop your file SVG, PNG, JPG, or
-                            GIF.
-                        </p>
+                        </label>
+                    </div>
+                    <div className="relative flex items-center mt-8">
+                        <span className="absolute">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                                />
+                            </svg>
+                        </span>
 
                         <input
-                            id="dropzone-file"
-                            type="file"
-                            className=""
-                            {...register("image", { required: true })}
-                        />
-                    </label>
-                </div>
-                <div className="col-span-full">
-                    <label
-                        htmlFor="name"
-                        className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                        User Name
-                    </label>
-                    <div className="mt-2">
-                        <input
-                            id="description"
+                            id="name"
                             rows={3}
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                            placeholder="Username"
                             {...register("name", { required: true })}
                         />
                     </div>
-                </div>
-                <div className="col-span-full">
-                    <label
-                        htmlFor="email"
-                        className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                        Email
-                    </label>
-                    <div className="mt-2">
+                    <div className="relative flex items-center mt-8">
+                        <span className="absolute">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                />
+                            </svg>
+                        </span>
+
                         <input
-                            id="description"
+                            id="email"
                             rows={3}
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                            placeholder="Email address"
                             {...register("email", { required: true })}
                         />
                     </div>
-                </div>
 
-                <div className="col-span-full">
-                    <label
-                        htmlFor="price"
-                        className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                        Password
-                    </label>
-                    <div className="mt-2">
+                    <div className="relative flex items-center mt-8">
+                        <span className="absolute">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                                />
+                            </svg>
+                        </span>
+
                         <input
                             {...register("password", { required: true })}
                             type="password"
-                            id="price"
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            id="password"
+                            className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                            placeholder="Password"
                         />
                     </div>
-                </div>
-                <div className="py-4  ">
-                    <button className="bg-black py-2 px-4 text-white hover:bg-gray-700">
-                        Register
-                    </button>
-                </div>
-            </form>
+                    <div className="py-4  ">
+                        <button className="bg-black py-2 px-4 text-white hover:bg-gray-700">
+                            Register
+                        </button>
+                    </div>
+                </form>
+            </div>
         </>
     );
 }
