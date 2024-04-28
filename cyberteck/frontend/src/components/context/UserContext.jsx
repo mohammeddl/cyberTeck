@@ -18,7 +18,7 @@ export default function UserContext({ children }) {
             : {}
     );
     const [authenticated, _setAuthenticated] = useState(
-        window.localStorage.getItem("ACCESS_TOKEN") === "true"
+        window.localStorage.getItem("ACCESS_TOKEN") ?  true : false
     );
 
     const login = async (email, password) => {

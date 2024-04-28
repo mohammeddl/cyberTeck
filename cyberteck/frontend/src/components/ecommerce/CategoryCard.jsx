@@ -135,7 +135,7 @@ export default function CategoryCard() {
                 </div>
             )}
             {products && products.length > 0 && (
-                <div className="flex flex-wrap gap-5 justify-center py-6">
+                <div className="flex flex-wrap gap-5 justify-center pb-6">
                     {products.map((product) => (
                         <CardProductEcom key={product.id} product={product} />
                     ))}

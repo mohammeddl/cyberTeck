@@ -5,10 +5,14 @@ const CartStateContext = createContext({
     setProducts: () => {},
     addProduct: () => {},
     removeProduct: () => {},
-
+    itemCount: 0,
+    setItemCount: () => {},
 });
 
 export default function CartContext({ children }) {
+    const [itemCount, setItemCount] = useState(0);
+    
+
     const [products, setProducts] = useState(
         window.localStorage.getItem("cart")
             ? JSON.parse(window.localStorage.getItem("cart"))
@@ -25,11 +29,13 @@ export default function CartContext({ children }) {
             existingProduct.quantity += 1;
         } else {
             cart.push({ ...product, quantity: 1 });
+            setItemCount(itemCount + 1)
         }
 
         window.localStorage.setItem("cart", JSON.stringify(cart));
-        setProducts(cart);
-    }
+        setProducts(cart)
+        
+    };
 
     const removeProduct = (product) => {
         let cart = window.localStorage.getItem("cart")
@@ -46,7 +52,7 @@ export default function CartContext({ children }) {
 
         window.localStorage.setItem("cart", JSON.stringify(cart));
         setProducts(cart);
-    }
+    };
 
     return (
         <>
@@ -56,6 +62,8 @@ export default function CartContext({ children }) {
                     setProducts,
                     addProduct,
                     removeProduct,
+                    itemCount,
+                    setItemCount,
                 }}
             >
                 {children}

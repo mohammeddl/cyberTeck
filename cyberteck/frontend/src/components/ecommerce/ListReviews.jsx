@@ -101,7 +101,7 @@ export default function ListReviews() {
                     <div className="mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
                         <div className="lg:grid lg:grid-rows-1 lg:grid-cols-7 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
                             <div className="lg:row-end-1 lg:col-span-4">
-                                <div className="aspect-w-4 aspect-h-3 rounded-lg bg-gray-100 overflow-hidden">
+                                <div className=" w-80 aspect-h-3 rounded-lg bg-gray-100 ">
                                     <img
                                         src={
                                             "http://localhost:8000/images/" +

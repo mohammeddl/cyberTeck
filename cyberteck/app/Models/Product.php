@@ -25,6 +25,10 @@ class Product extends Model
     }
     public function categories()
     {
-        return $this->hasOne(Category::class,'id');
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 }

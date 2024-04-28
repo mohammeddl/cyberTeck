@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { axiosClient } from "../../api/axios";
+import Swal from "sweetalert2";
 
 export default function ReviewForm({ productId, userId }) {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -24,6 +25,13 @@ export default function ReviewForm({ productId, userId }) {
             console.log("Response:", response);
             if (response.status === 201) {
                 console.log("Review saved successfully!");
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Review create successfully",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
             }
         } catch (error) {
             console.error("Error saving review:", error);

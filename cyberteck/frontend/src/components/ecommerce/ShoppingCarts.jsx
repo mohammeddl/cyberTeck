@@ -6,8 +6,9 @@ import { useCartContext } from "../context/CartContext";
 
 export default function ShoppingCarts({ isOpen, setOpen }) {
     // const [products, setProducts] = useState([]);
-    const { products, setProducts } = useCartContext();
+    const { products, setProducts, itemCount, setItemCount } = useCartContext();
     const [price, setPrice] = useState(0);
+    console.log(itemCount);
 
     useEffect(() => {
         const total = products.reduce((acc, item) => {
@@ -132,7 +133,6 @@ export default function ShoppingCarts({ isOpen, setOpen }) {
                                                                             className="h-full w-full object-cover object-center"
                                                                         />
                                                                     </div>
-
                                                                     <div className="ml-4 flex flex-1 flex-col">
                                                                         <div>
                                                                             <div className="flex justify-between text-base font-medium text-gray-900">
@@ -212,6 +212,13 @@ export default function ShoppingCarts({ isOpen, setOpen }) {
                                                                                                 updatedCart
                                                                                             )
                                                                                         );
+                                                                                        setItemCount(
+                                                                                            itemCount -
+                                                                                                1
+                                                                                        );
+                                                                                        console.log(
+                                                                                            itemCount
+                                                                                        );
                                                                                     }}
                                                                                     type="button"
                                                                                     className="font-medium text-red-600 hover:text-gray-700"
@@ -228,7 +235,6 @@ export default function ShoppingCarts({ isOpen, setOpen }) {
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                                             <div className="flex justify-between text-base font-medium text-gray-900">
                                                 <p>Subtotal</p>

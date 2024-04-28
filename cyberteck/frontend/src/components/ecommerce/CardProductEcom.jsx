@@ -3,15 +3,15 @@ import { Button } from "@/components/ui/button";
 export default function CardProductEcom({ product  }) {
 
     return (
-        <div  className="bg-white rounded-lg shadow-lg overflow-hidden w-full max-w-sm mx-auto">
+        <div  className="bg-white rounded-lg shadow-lg overflow-hidden   w-full max-w-sm mx-auto">
             <div className="aspect-square bg-gray-100 overflow-hidden">
                 <img
                     alt="Gaming Headphones"
                     className="object-cover w-full h-full"
-                    height="400"
+                    height="200"
                     src={"http://localhost:8000/images/" + product.image}
                     style={{
-                        aspectRatio: "400/400",
+                        aspectRatio: "200/200",
                         objectFit: "cover",
                     }}
                     width="400"
@@ -29,7 +29,7 @@ export default function CardProductEcom({ product  }) {
                         <Button variant="outline">
                             Add to Cart
                         </Button>
-                        <Button>Buy Now</Button>
+                        
                     </div>
                 </div>
             </div>

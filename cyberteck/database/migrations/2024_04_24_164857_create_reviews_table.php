@@ -16,8 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->text('review');
             $table->unsignedBigInteger('product_id');
-            $table->foreign('user_id')->references('id')->on('shopping_cart')->onDelete('cascade');
-            $table->foreign('product_id')->references('id')->on('shopping_cart')->onDelete('cascade');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            
             $table->timestamps();
         });
     }

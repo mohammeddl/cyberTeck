@@ -1,15 +1,18 @@
-import UserLogin from "../components/userLogin";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useUserContext } from "../components/context/UserContext";
+import UserLogin from "../components/userLogin";
+
 
 export default function Login() {
+
+    const {authenticated }=useUserContext()
+
     const navigate = useNavigate();
-    useEffect(() => {
-        const user = localStorage.getItem("USER");
-        if (user) {
-            navigate("/login");
-        }
-    }, [navigate]);
+
+    if(authenticated){
+        navigate('/eccommerce')
+    }
+    
     return (
         <>
         <div className="flex justify-center my-24">
