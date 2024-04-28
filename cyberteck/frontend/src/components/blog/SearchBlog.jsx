@@ -52,7 +52,7 @@ export default function SearchBlog() {
                     </button>
                 </form>
             </div>
-            <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
+            <div className="mt-12 mx-20 max-w-lg  grid gap-5 lg:grid-cols-3 lg:max-w-none">
                 {error && <h1 className="text-red-500">{error}</h1>}
                 {news.length > 0 &&
                     news.map((blog) => (

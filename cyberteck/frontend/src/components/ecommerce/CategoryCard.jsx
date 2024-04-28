@@ -88,7 +88,7 @@ export default function CategoryCard() {
                 </div>
             </div>
             <div className="flex justify-center">
-                <div className="grid grid-cols-2 cursor-pointer gap-4 sm:grid-cols-6 m-4 md:mx-24">
+                <div className="grid grid-cols-4 cursor-pointer gap-4  sm:grid-cols-7 m-4 md:mx-24">
                     {categories.map((category) => (
                         <div
                             key={category.id}
