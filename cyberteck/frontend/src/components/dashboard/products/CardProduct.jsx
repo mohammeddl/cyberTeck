@@ -12,9 +12,8 @@ import Swal from "sweetalert2";
 import { axiosClient } from "../../../api/axios";
 import EditProductModel from "./EditProductModel";
 
-
 export default function CardProduct() {
-    const [productes, setProduct] = useState([] );
+    const [productes, setProduct] = useState([]);
 
     const fetchData = async () => {
         try {
@@ -61,8 +60,7 @@ export default function CardProduct() {
             }
         });
     };
-    
-    
+
     const [isOpen, setIsOpen] = useState(false);
     const [indexEdit, setIndexEdit] = useState(null);
     const clickEdit = (idx) => {
@@ -105,7 +103,6 @@ export default function CardProduct() {
                                     color="blue-gray"
                                     className="flex items-center gap-1.5 font-normal"
                                 >
-                                    
                                     {product.categories.category_name}
                                 </Typography>
                             </div>
@@ -126,9 +123,7 @@ export default function CardProduct() {
                             >
                                 Modify
                             </Button>
-                            <Button
-                                onClick={() => deleteProduct(product.id)}
-                            >
+                            <Button onClick={() => deleteProduct(product.id)}>
                                 delete
                             </Button>
                         </CardFooter>

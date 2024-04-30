@@ -1,6 +1,7 @@
 import Offers from "../components/ecommerce/Offers";
 import Faq from "../components/faq";
 import Hero from "../components/index/Hero";
+import { BlogIndex } from "../components/index/blogIdex";
 
 const HomeComponent = () => {
     return (
@@ -19,6 +20,7 @@ const HomeComponent = () => {
                 </div>
             </section>
             <Hero />
+            <BlogIndex/>
 
             <section className="box-border relative w-full font-sans leading-6 text-gray-700 bg-white border-0 border-gray-200 border-solid">
                 <div className="box-border flex flex-col items-center px-8  mx-auto leading-6 border-solid max-w-7xl xl:px-16 md:items-stretch md:justify-center ">

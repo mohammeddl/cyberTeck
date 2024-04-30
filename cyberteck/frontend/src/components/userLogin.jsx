@@ -47,7 +47,12 @@ export default function UserLogin() {
         const response = await login(values.email, values.password);
         console.log(response);
         if (response.data.user) {
-            navigate(home);
+            if(response.data.user.role === "admin"){
+            navigate('/products');
+            }
+            else{
+                navigate(home);
+            }
         } else {
             setError("email", {
                 message: response.data.message,

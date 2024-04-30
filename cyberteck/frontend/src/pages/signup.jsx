@@ -56,13 +56,20 @@ export default function Signup() {
 
     return (
         <>
+        <div className="bg-background ">
+
             <div className="container flex items-center justify-center md:py-16 px-6 mx-auto">
+
                 <form
                     className="w-full max-w-md"
                     onSubmit={handleSubmit(onSubmitRegister)}
                 >
-                     <div className="flex justify-center mx-auto">
-                        <img className="w-auto h-16 sm:h-16" src={Logo} alt="" />
+                    <div className="flex justify-center mx-auto">
+                        <img
+                            className="w-auto h-16 sm:h-16"
+                            src={Logo}
+                            alt=""
+                        />
                     </div>
                     <div>
                         <label
@@ -181,6 +188,7 @@ export default function Signup() {
                     </div>
                 </form>
             </div>
+        </div>
         </>
     );
 }
